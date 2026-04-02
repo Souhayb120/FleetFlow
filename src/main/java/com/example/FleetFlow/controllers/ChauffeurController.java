@@ -1,6 +1,7 @@
 package com.example.FleetFlow.controllers;
 
 
+import com.example.FleetFlow.DTO.ChauffeurDTO;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.services.ChauffeurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class ChauffeurController {
     }
 
     @GetMapping
-    public List<Chauffeur> displayChaffeur(){
+    public List<ChauffeurDTO> displayChaffeur(){
         return chauffeurService.displayChauffeurs();
     }
 
@@ -36,7 +37,7 @@ public class ChauffeurController {
     }
 
     @GetMapping("/chaffeursDisponible")
-    public List<Chauffeur> findByIsDisponible(){
+    public List<ChauffeurDTO> findByIsDisponible(){
         return chauffeurService.findByDisponibility();
     }
 

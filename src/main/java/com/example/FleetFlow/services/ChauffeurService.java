@@ -1,15 +1,23 @@
 package com.example.FleetFlow.services;
 
 
+import com.example.FleetFlow.DTO.ChauffeurDTO;
+import com.example.FleetFlow.Mapper.ChaffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ChauffeurService {
-    final private ChauffeurRepository chauffeurRepository;
+
+    @Autowired
+    private ChaffeurMapper mapper;
+    @Autowired
+    private ChauffeurRepository chauffeurRepository;
+
 
     public ChauffeurService(ChauffeurRepository chauffeurRepository) {
         this.chauffeurRepository = chauffeurRepository;
@@ -23,8 +31,12 @@ public class ChauffeurService {
         chauffeurRepository.deleteById(id);
     }
 
-    public List<Chauffeur> displayChauffeurs(){
-      return  chauffeurRepository.findAll();
+    public List<ChauffeurDTO> displayChauffeurs(){
+       List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
+        return chauffeurs
+                .stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 
     public Chauffeur updateChauffeur (int id, Chauffeur newData){
@@ -39,7 +51,7 @@ public class ChauffeurService {
         return null;
     }
 
-    public List<Chauffeur> findByDisponibility(){
+    public List<ChauffeurDTO> findByDisponibility(){
      return chauffeurRepository.findByIsDisponibleTrue();
     }
 
