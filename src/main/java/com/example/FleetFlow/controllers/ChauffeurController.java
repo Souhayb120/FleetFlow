@@ -2,9 +2,7 @@ package com.example.FleetFlow.controllers;
 
 
 import com.example.FleetFlow.models.Chauffeur;
-import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.services.ChauffeurService;
-import com.example.FleetFlow.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +35,9 @@ public class ChauffeurController {
         return chauffeurService.updateChauffeur(id,chauffeur);
     }
 
-    @GetMapping
-    public List<Chauffeur> findByStatus(String status){
-        return chauffeurService.findByStatus(status);
+    @GetMapping("/chaffeursDisponible")
+    public List<Chauffeur> findByIsDisponible(){
+        return chauffeurService.findByDisponibility();
     }
 
 

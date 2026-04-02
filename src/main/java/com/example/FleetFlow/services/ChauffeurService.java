@@ -23,7 +23,7 @@ public class ChauffeurService {
         chauffeurRepository.deleteById(id);
     }
 
-    public List<Chauffeur  > displayChauffeurs(){
+    public List<Chauffeur> displayChauffeurs(){
       return  chauffeurRepository.findAll();
     }
 
@@ -32,15 +32,15 @@ public class ChauffeurService {
         if(chauffeur != null){
             chauffeur.setNom(newData.getNom());
             chauffeur.setPhone(newData.getPhone());
-            chauffeur.setStatus(newData.getStatus());
+            chauffeur.setIsDisponible(newData.getIsDisponible());
             chauffeur.setPermisType(newData.getPermisType());
             return chauffeurRepository.save(chauffeur);
         }
         return null;
     }
 
-    public List<Chauffeur> findByStatus(String status){
-     return  chauffeurRepository.findByStatus(status);
+    public List<Chauffeur> findByDisponibility(){
+     return chauffeurRepository.findByIsDisponibleTrue();
     }
 
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface ChauffeurRepository extends JpaRepository<Chauffeur, Integer> {
-    public List<Chauffeur> findByStatus(String status);
+    List<Chauffeur> findByIsDisponibleTrue();
 }
