@@ -1,4 +1,4 @@
 package com.example.FleetFlow.repositories;
 
-public class chauffeurRepository {
+public interface chauffeurRepository {
 }

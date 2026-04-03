@@ -1,4 +1,28 @@
 package com.example.FleetFlow.models;
 
-public class Vehicule {
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Vehicule { @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+
+    private String matricule;
+    private int capacite;
+    private boolean disponible;
+    private String type;
+
+    @OneToMany(mappedBy = "vehicule")
+    private List<Livraison> livraisons;
+
 }
