@@ -2,6 +2,7 @@ package com.example.FleetFlow.services;
 
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
+import com.example.FleetFlow.DTO.ClientDTO;
 import com.example.FleetFlow.DTO.CreateChauffeurDTO;
 import com.example.FleetFlow.Mapper.ChaffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
@@ -36,7 +37,12 @@ public class ChauffeurService {
        List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
         return chauffeurs
                 .stream()
-                .map(mapper::toDTO)
+                .map((chauffeur)->{
+                    ChauffeurDTO dto = mapper.toDTO(chauffeur);
+                    dto.setNombreVehicules(chauffeur.getVichelList().size());
+                    dto.setNombreLivraisons(chauffeur.getLivraisonList().size());
+                    return dto;
+                })
                 .toList();
     }
 
