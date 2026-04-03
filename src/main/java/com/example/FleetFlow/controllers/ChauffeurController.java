@@ -2,6 +2,7 @@ package com.example.FleetFlow.controllers;
 
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
+import com.example.FleetFlow.DTO.CreateChauffeurDTO;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.services.ChauffeurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ChauffeurController {
     private ChauffeurService chauffeurService;
 
     @PostMapping
-    public void saveChauffeur(@RequestBody Chauffeur chauffeur){
+    public void saveChauffeur(@RequestBody CreateChauffeurDTO chauffeur){
         chauffeurService.ajouterChauffeur(chauffeur);
     }
 

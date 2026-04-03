@@ -1,5 +1,7 @@
 package com.example.FleetFlow.controllers;
 
+import com.example.FleetFlow.DTO.ClientDTO;
+import com.example.FleetFlow.DTO.CreateClientDTO;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,12 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public void saveCommande(@RequestBody Client client){
+    public void saveCommande(@RequestBody CreateClientDTO client){
         clientService.ajouterClient(client);
     }
 
     @GetMapping
-    public List<Client> displayClients(){
+    public List<ClientDTO> displayClients(){
         return clientService.afficherClients();
     }
 

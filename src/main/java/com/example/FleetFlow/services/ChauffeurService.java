@@ -2,6 +2,7 @@ package com.example.FleetFlow.services;
 
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
+import com.example.FleetFlow.DTO.CreateChauffeurDTO;
 import com.example.FleetFlow.Mapper.ChaffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
@@ -23,8 +24,8 @@ public class ChauffeurService {
         this.chauffeurRepository = chauffeurRepository;
     }
 
-    public void ajouterChauffeur(Chauffeur chauffeur){
-        chauffeurRepository.save(chauffeur);
+    public void ajouterChauffeur(CreateChauffeurDTO chauffeur){
+        chauffeurRepository.save(mapper.toEntity(chauffeur));
     }
 
     public void deleteChauffeur(int id){
