@@ -4,7 +4,7 @@ import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.models.Vehicule;
 import com.example.FleetFlow.repositories.LivraisonRepository;
-import com.example.FleetFlow.repositories.chauffeurRepository;
+import com.example.FleetFlow.repositories.ChauffeurRepository;
 import com.example.FleetFlow.repositories.vehculeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class livraisionService {
     @Autowired
     private LivraisonRepository livraisionRepository;
     @Autowired
-    private chauffeurRepository chauffeurRepository;
+    private ChauffeurRepository chauffeurRepository;
     @Autowired
     private vehculeRepository vehiculeRepository;
 
@@ -24,7 +24,7 @@ public class livraisionService {
         l.setStatut("EN_ATTENTE");
         return livraisionRepository.save(l);
     }
-    public Livraison assigner(Long livraisonId, Long chauffeurId, Long vehiculeId) {
+    public Livraison assigner(Long livraisonId, Integer chauffeurId, Long vehiculeId) {
 
         Livraison livraison = livraisionRepository.findById(livraisonId).get();
         Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).get();

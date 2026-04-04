@@ -2,9 +2,8 @@ package com.example.FleetFlow.services;
 
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
-import com.example.FleetFlow.DTO.ClientDTO;
 import com.example.FleetFlow.DTO.CreateChauffeurDTO;
-import com.example.FleetFlow.Mapper.ChaffeurMapper;
+import com.example.FleetFlow.Mapper.ChauffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.List;
 public class ChauffeurService {
 
     @Autowired
-    private ChaffeurMapper mapper;
+    private ChauffeurMapper mapper;
     @Autowired
     private ChauffeurRepository chauffeurRepository;
 

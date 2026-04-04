@@ -23,17 +23,17 @@ public class ChauffeurController {
     }
 
     @GetMapping
-    public List<ChauffeurDTO> displayChaffeur(){
+    public List<ChauffeurDTO> displayChauffeurs(){
         return chauffeurService.displayChauffeurs();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteChaffeur(@PathVariable  int id){
+    public void deleteChauffeur(@PathVariable  int id){
         chauffeurService.deleteChauffeur(id);
     }
 
     @PutMapping("/{id}")
-    public Chauffeur updateChaffeur(@PathVariable int id,@RequestBody Chauffeur chauffeur){
+    public Chauffeur updateChauffeur(@PathVariable int id,@RequestBody Chauffeur chauffeur){
         return chauffeurService.updateChauffeur(id,chauffeur);
     }
 

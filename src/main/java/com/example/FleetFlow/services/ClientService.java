@@ -2,9 +2,7 @@ package com.example.FleetFlow.services;
 
 import com.example.FleetFlow.DTO.ClientDTO;
 import com.example.FleetFlow.DTO.CreateClientDTO;
-import com.example.FleetFlow.Mapper.ChaffeurMapper;
 import com.example.FleetFlow.Mapper.ClientMapper;
-import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;

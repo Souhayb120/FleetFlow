@@ -25,4 +25,8 @@ private Long id;
     @OneToMany(mappedBy = "vehicule")
     private List<Livraison> livraisons;
 
+    @ManyToOne
+    @JoinColumn(name = "chauffeur_id")
+    private Chauffeur chauffeur;
+
 }

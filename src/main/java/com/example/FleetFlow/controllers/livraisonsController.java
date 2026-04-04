@@ -21,7 +21,7 @@ public class livraisonsController {
             @PathVariable long id,
             @RequestParam long chauffeurId,
             @RequestParam long vehiculeId){
-     return livraisionServices.assigner(id,chauffeurId,vehiculeId);
+     return livraisionServices.assigner(id, (int) chauffeurId,vehiculeId);
 }
 
     @PutMapping("/{id}/statut")
