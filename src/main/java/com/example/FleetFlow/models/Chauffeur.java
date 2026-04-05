@@ -21,7 +21,7 @@ public class Chauffeur {
     private String nom;
     private String phone;
     private String permisType;
-    private Boolean isDisponible = false;
+    private Boolean isDisponible = true;
 
     @OneToMany(mappedBy = "chauffeur")
     private List<Livraison> livraisonList;

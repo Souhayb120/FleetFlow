@@ -16,7 +16,7 @@ private vehculeService vehculeService;
 public Vehicule ajouterVehucle(@RequestBody Vehicule v){
 return vehculeService.ajouterVehicule(v);
 }
-@PutMapping
+@PutMapping("/{id}")
     public Vehicule modefieVehicule(@PathVariable long id , @RequestBody Vehicule v){
     return vehculeService.modifierVehicule(id,v);
 }

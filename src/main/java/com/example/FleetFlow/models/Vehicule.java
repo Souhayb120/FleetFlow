@@ -19,11 +19,10 @@ private Long id;
 
     private String matricule;
     private int capacite;
-    private boolean disponible;
+    private boolean disponible = true;
     private String type;
 
-    @OneToMany(mappedBy = "vehicule")
-    private List<Livraison> livraisons;
+
 
     @ManyToOne
     @JoinColumn(name = "chauffeur_id")

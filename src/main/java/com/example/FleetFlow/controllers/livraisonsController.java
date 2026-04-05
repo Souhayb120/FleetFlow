@@ -36,4 +36,9 @@ public class livraisonsController {
         return livraisionServices.getAll();
     }
 
+
+    @GetMapping("/getLivraisonByChauffeurDisponible")
+    public List<Livraison> getlivraisonByChauffeurDis() {
+        return livraisionServices.getLivraisonByChaffeurDisponible();
+    }
 }

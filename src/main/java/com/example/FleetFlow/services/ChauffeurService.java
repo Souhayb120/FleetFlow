@@ -7,6 +7,7 @@ import com.example.FleetFlow.Mapper.ChauffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ChauffeurService {
     private ChauffeurMapper mapper;
     @Autowired
     private ChauffeurRepository chauffeurRepository;
+
 
 
     public ChauffeurService(ChauffeurRepository chauffeurRepository) {
@@ -58,7 +60,28 @@ public class ChauffeurService {
     }
 
     public List<ChauffeurDTO> findByDisponibility(){
-     return chauffeurRepository.findByIsDisponibleTrue();
+        List<Chauffeur> chauffeurs = chauffeurRepository.findByIsDisponibleTrue();
+        return chauffeurs
+                .stream()
+                .map((chauffeur)->{
+                    ChauffeurDTO dto = mapper.toDTO(chauffeur);
+                    return dto;
+                }).toList();
     }
 
+
+    public List<ChauffeurDTO> findByPermisTypeDisponible(String permisType , Boolean isDisponible){
+      return  chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible);
+    }
+
+
+    public List<String> displayChauffeursByNom(){
+        List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
+        return chauffeurs
+                .stream()
+                .map((chauffeur)->{
+                    ChauffeurDTO dto = mapper.toDTO(chauffeur);
+                    return dto.getNom();
+                }).toList();
+    }
 }

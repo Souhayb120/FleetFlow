@@ -29,6 +29,9 @@ public class livraisionService {
         Livraison livraison = livraisionRepository.findById(livraisonId).get();
         Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).get();
         Vehicule vehicule = vehiculeRepository.findById(vehiculeId).get();
+        chauffeur.setIsDisponible(false);
+        vehicule.setDisponible(false);
+        livraison.setStatut("Occuppier");
 
         livraison.setChauffeur(chauffeur);
         livraison.setVehicule(vehicule);
@@ -44,6 +47,10 @@ public class livraisionService {
     }
     public List<Livraison> getAll() {
         return livraisionRepository.findAll();
+    }
+
+    public List<Livraison> getLivraisonByChaffeurDisponible(){
+        return livraisionRepository.findByChauffeurIsDisponible();
     }
 
 }

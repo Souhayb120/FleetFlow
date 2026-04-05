@@ -43,4 +43,15 @@ public class ChauffeurController {
     }
 
 
+    @GetMapping("/{type}")
+    public List<ChauffeurDTO> displayChauffeurs(@PathVariable String type , @PathVariable Boolean isDisponible){
+        return chauffeurService.findByPermisTypeDisponible(type,isDisponible);
+    }
+
+    @GetMapping("/displayChauffeurByNom")
+    public List<String> displayChauffeursByNom(){
+        return chauffeurService.displayChauffeursByNom();
+    }
+
+
 }
