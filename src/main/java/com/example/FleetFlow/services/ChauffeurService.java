@@ -70,8 +70,14 @@ public class ChauffeurService {
     }
 
 
-    public List<ChauffeurDTO> findByPermisTypeDisponible(String permisType , Boolean isDisponible){
-      return  chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible);
+    public List<ChauffeurDTO> findByPermisTypeDisponible(String permisType,Boolean isDisponible){
+        List<Chauffeur> chauffeurs = chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible);
+        return chauffeurs
+                .stream()
+                .map((chauffeur)->{
+                    ChauffeurDTO dto = mapper.toDTO(chauffeur);
+                    return dto;
+                }).toList();
     }
 
 
