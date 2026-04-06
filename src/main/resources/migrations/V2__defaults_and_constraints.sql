@@ -29,5 +29,3 @@ ALTER TABLE vehicle
 ALTER TABLE vehicle
     ADD CONSTRAINT chk_capacite CHECK (capacite > 0);
 
-ALTER TABLE vehicle
-    ADD CONSTRAINT uq_matricule UNIQUE (matricule);
