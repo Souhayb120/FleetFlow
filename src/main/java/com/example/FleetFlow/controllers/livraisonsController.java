@@ -5,6 +5,7 @@ import com.example.FleetFlow.services.livraisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -40,5 +41,21 @@ public class livraisonsController {
     @GetMapping("/getLivraisonByChauffeurDisponible")
     public List<Livraison> getlivraisonByChauffeurDis() {
         return livraisionServices.getLivraisonByChaffeurDisponible();
+    }
+    @GetMapping("/statut")
+    public List<Livraison> getbystatut( @RequestParam String statut){
+     return livraisionServices.getbystatut(statut);
+    }
+    @GetMapping("/client")
+    public List<Livraison> findbyclientid( @RequestParam Long id){
+     return livraisionServices.findbyclientId(id);
+    }
+    @GetMapping("/dates")
+    public List<Livraison>findbetweendates( @RequestParam LocalDate date1, @RequestParam LocalDate date2){
+     return livraisionServices.findbetweendates(date1,date2);
+    }
+    @GetMapping("/destination")
+    public List<Livraison>findbydestinationadress( @RequestParam String ville){
+        return livraisionServices.findbyadressedestination(ville);
     }
 }
