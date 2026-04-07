@@ -22,6 +22,7 @@ public class Livraison {
 
     @ManyToOne
     @JoinColumn(name = "vehicule_id")
+
     private Vehicule vehicule;
 
     public Long getId() {
