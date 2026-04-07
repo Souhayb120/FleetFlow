@@ -30,7 +30,7 @@ return vehculeService.listerVehicule();
 }
 
 @GetMapping("/statut")
-public List<Vehicule> findbystatut(String statut){
+public List<Vehicule> findbystatut(boolean statut){
     return vehculeService.findbystatut(statut);
 }
 @GetMapping("/capacity")

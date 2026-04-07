@@ -26,8 +26,8 @@ public List <Vehicule> listerVehicule(){
         return vehculeRepository.findByDisponibleIsTrue();
 }
 
-public List<Vehicule> findbystatut(String statut){
-        return vehculeRepository.findBystatut(statut);
+public List<Vehicule> findbystatut(boolean statut){
+        return vehculeRepository.findByDisponible(statut);
 }
 
 public List<Vehicule>findgreteCapacitythan(int capacity){

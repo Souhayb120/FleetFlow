@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface vehculeRepository extends JpaRepository<Vehicule,Long> {
 List<Vehicule> findByDisponibleIsTrue();
-List<Vehicule> findBystatut(String statut);
+
+    List<Vehicule> findByDisponible(boolean disponible);
 @Query("SELECT v FROM Vehicule v where v.capacite > :thisCapcity")
     List<Vehicule> findByCapaciteGreaterThan(int capacity);
 
