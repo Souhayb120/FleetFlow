@@ -2,8 +2,10 @@ package com.example.FleetFlow.controllers;
 
 import com.example.FleetFlow.DTO.ClientDTO;
 import com.example.FleetFlow.DTO.CreateClientDTO;
+import com.example.FleetFlow.Exceptions.ResourceNotFoundException;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,8 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public void saveCommande(@RequestBody CreateClientDTO client){
-        clientService.ajouterClient(client);
+    public void saveClient(@Valid @RequestBody CreateClientDTO client){
+            clientService.ajouterClient(client);
     }
 
     @GetMapping
