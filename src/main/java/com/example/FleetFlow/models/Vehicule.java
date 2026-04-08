@@ -19,10 +19,8 @@ private Long id;
 
     private String matricule;
     private int capacite;
-    private boolean disponible = true;
+    private String statut;
     private String type;
-
-
 
     @ManyToOne
     @JoinColumn(name = "chauffeur_id")

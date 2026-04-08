@@ -17,7 +17,7 @@ CREATE TABLE vehicule (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           matricule VARCHAR(50) UNIQUE NOT NULL,
                           capacite INT,
-                          disponible BOOLEAN ,
+                          statut VARCHAR(50) ,
                           type VARCHAR(50)
 );
 

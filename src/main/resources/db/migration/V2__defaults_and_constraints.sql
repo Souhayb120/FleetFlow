@@ -29,7 +29,7 @@ ALTER TABLE livraison
     MODIFY COLUMN statut VARCHAR(50) DEFAULT 'ENATTENTE';
 
 ALTER TABLE vehicule
-    MODIFY COLUMN disponible BOOLEAN DEFAULT true;
+    MODIFY COLUMN statut VARCHAR(50) DEFAULT 'Disponible';
 
 ALTER TABLE vehicule
     ADD CONSTRAINT chk_capacite CHECK (capacite > 0);
