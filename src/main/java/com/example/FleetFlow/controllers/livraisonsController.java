@@ -1,5 +1,7 @@
 package com.example.FleetFlow.controllers;
 
+import com.example.FleetFlow.DTO.LivraisionDTO;
+import com.example.FleetFlow.Mapper.LivraisionMapper;
 import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.services.livraisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,51 +13,101 @@ import java.util.List;
 @RestController
 @RequestMapping("/livraison")
 public class livraisonsController {
+
     @Autowired
     private livraisionService livraisionServices;
- @PostMapping
-    public Livraison creatLivraision(@RequestBody Livraison livraison){
-     return livraisionServices.creeLivraision(livraison);
- }
-@PutMapping("/{id}/assign")
-    public Livraison assign(
+
+    @Autowired
+    private LivraisionMapper livraisionMapper;
+
+
+    @PostMapping
+    public LivraisionDTO creatLivraision(@RequestBody LivraisionDTO dto) {
+
+        Livraison livraison = livraisionMapper.toEntity(dto);
+        Livraison saved = livraisionServices.creeLivraision(livraison);
+
+        return livraisionMapper.toDTO(saved);
+    }
+
+
+    @PutMapping("/{id}/assign")
+    public LivraisionDTO assign(
             @PathVariable long id,
             @RequestParam long chauffeurId,
-            @RequestParam long vehiculeId){
-     return livraisionServices.assigner(id, (int) chauffeurId,vehiculeId);
-}
+            @RequestParam long vehiculeId) {
+
+        Livraison livraison = livraisionServices.assigner(id, (int) chauffeurId, vehiculeId);
+        return livraisionMapper.toDTO(livraison);
+    }
+
 
     @PutMapping("/{id}/statut")
-    public Livraison updateStatut(
+    public LivraisionDTO updateStatut(
             @PathVariable Long id,
             @RequestParam String statut) {
 
-        return livraisionServices.updateStatut(id, statut);
+        Livraison livraison = livraisionServices.updateStatut(id, statut);
+        return livraisionMapper.toDTO(livraison);
     }
+
+
     @GetMapping
-    public List<Livraison> list() {
-        return livraisionServices.getAll();
+    public List<LivraisionDTO> list() {
+
+        return livraisionServices.getAll()
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
 
 
     @GetMapping("/getLivraisonByChauffeurDisponible")
-    public List<Livraison> getlivraisonByChauffeurDis() {
-        return livraisionServices.getLivraisonByChaffeurDisponible();
+    public List<LivraisionDTO> getlivraisonByChauffeurDis() {
+
+        return livraisionServices.getLivraisonByChaffeurDisponible()
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
+
     @GetMapping("/statut")
-    public List<Livraison> getbystatut( @RequestParam String statut){
-     return livraisionServices.getbystatut(statut);
+    public List<LivraisionDTO> getbystatut(@RequestParam String statut) {
+
+        return livraisionServices.getbystatut(statut)
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
+
+
     @GetMapping("/client")
-    public List<Livraison> findbyclientid( @RequestParam Long id){
-     return livraisionServices.findbyclientId(id);
+    public List<LivraisionDTO> findbyclientid(@RequestParam Long id) {
+
+        return livraisionServices.findbyclientId(id)
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
+
+
     @GetMapping("/dates")
-    public List<Livraison>findbetweendates( @RequestParam LocalDate date1, @RequestParam LocalDate date2){
-     return livraisionServices.findbetweendates(date1,date2);
+    public List<LivraisionDTO> findbetweendates(
+            @RequestParam LocalDate date1,
+            @RequestParam LocalDate date2) {
+
+        return livraisionServices.findbetweendates(date1, date2)
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
+
     @GetMapping("/destination")
-    public List<Livraison>findbydestinationadress( @RequestParam String ville){
-        return livraisionServices.findbyadressedestination(ville);
+    public List<LivraisionDTO> findbydestinationadress(@RequestParam String ville) {
+
+        return livraisionServices.findbyadressedestination(ville)
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
     }
 }
