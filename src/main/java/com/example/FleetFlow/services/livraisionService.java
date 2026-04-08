@@ -9,6 +9,7 @@ import com.example.FleetFlow.repositories.vehculeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,6 +48,18 @@ public class livraisionService {
     }
     public List<Livraison> getAll() {
         return livraisionRepository.findAll();
+    }
+    public  List<Livraison> getbystatut(String statut){
+        return livraisionRepository.findByStatut(statut);
+    }
+    public List<Livraison> findbyclientId(Long id){
+        return livraisionRepository.findByClientId(id);
+    }
+    public List<Livraison> findbetweendates(LocalDate date1,LocalDate date2){
+        return livraisionRepository.findBetweenDates(date1,date2);
+    }
+    public List<Livraison> findbyadressedestination(String ville){
+        return livraisionRepository.findByadresseDestination(ville);
     }
 
     public List<Livraison> getLivraisonByChaffeurDisponible(){

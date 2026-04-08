@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicules")
-public class vehiculesController {
+public class vehiclesController {
 @Autowired
 private vehculeService vehculeService;
 @PostMapping
@@ -28,4 +28,14 @@ public void supprimer(@PathVariable long id){
 public List<Vehicule> vehicules(){
 return vehculeService.listerVehicule();
 }
+
+@GetMapping("/statut")
+public List<Vehicule> findbystatut(String statut){
+    return vehculeService.findbystatut(statut);
+}
+@GetMapping("/capacity")
+    public List<Vehicule> findGreaterCapacitythan(int capacity){
+    return vehculeService.findgreteCapacitythan(capacity);
+}
+
 }
