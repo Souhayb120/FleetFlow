@@ -3,8 +3,10 @@ package com.example.FleetFlow.controllers;
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
 import com.example.FleetFlow.DTO.CreateChauffeurDTO;
+
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.services.ChauffeurService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,7 @@ public class ChauffeurController {
     private ChauffeurService chauffeurService;
 
     @PostMapping
-    public void saveChauffeur(@RequestBody CreateChauffeurDTO chauffeur){
+    public void saveChauffeur( @Valid @RequestBody CreateChauffeurDTO chauffeur){
         chauffeurService.ajouterChauffeur(chauffeur);
     }
 

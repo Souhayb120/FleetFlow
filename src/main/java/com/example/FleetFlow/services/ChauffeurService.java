@@ -81,13 +81,5 @@ public class ChauffeurService {
     }
 
 
-    public List<String> displayChauffeursByNom(){
-        List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
-        return chauffeurs
-                .stream()
-                .map((chauffeur)->{
-                    ChauffeurDTO dto = mapper.toDTO(chauffeur);
-                    return dto.getNom();
-                }).toList();
-    }
+
 }
