@@ -16,5 +16,5 @@ public interface LivraisionMapper {
     @Mapping(source = "clientId", target = "client.id")
     @Mapping(source = "chauffeurId", target = "chauffeur.id")
     @Mapping(source = "vehiculeId", target = "vehicule.id")
-    Livraison toEntity(LivraisionDTO dto); // ✅ FIXED
+    Livraison toEntity(LivraisionDTO dto);
 }

@@ -20,7 +20,7 @@ public class livraisonsController {
     @Autowired
     private LivraisionMapper livraisionMapper;
 
-    // ✅ CREATE using DTO
+
     @PostMapping
     public LivraisionDTO creatLivraision(@RequestBody LivraisionDTO dto) {
 
@@ -30,7 +30,7 @@ public class livraisonsController {
         return livraisionMapper.toDTO(saved);
     }
 
-    // ✅ ASSIGN (keep as entity → then convert)
+
     @PutMapping("/{id}/assign")
     public LivraisionDTO assign(
             @PathVariable long id,
@@ -41,7 +41,7 @@ public class livraisonsController {
         return livraisionMapper.toDTO(livraison);
     }
 
-    // ✅ UPDATE STATUT
+
     @PutMapping("/{id}/statut")
     public LivraisionDTO updateStatut(
             @PathVariable Long id,
@@ -51,7 +51,7 @@ public class livraisonsController {
         return livraisionMapper.toDTO(livraison);
     }
 
-    // ✅ GET ALL
+
     @GetMapping
     public List<LivraisionDTO> list() {
 
@@ -61,7 +61,7 @@ public class livraisonsController {
                 .toList();
     }
 
-    // ✅ Chauffeur disponible
+
     @GetMapping("/getLivraisonByChauffeurDisponible")
     public List<LivraisionDTO> getlivraisonByChauffeurDis() {
 
@@ -71,7 +71,6 @@ public class livraisonsController {
                 .toList();
     }
 
-    // ✅ By statut
     @GetMapping("/statut")
     public List<LivraisionDTO> getbystatut(@RequestParam String statut) {
 
@@ -81,7 +80,7 @@ public class livraisonsController {
                 .toList();
     }
 
-    // ✅ By client
+
     @GetMapping("/client")
     public List<LivraisionDTO> findbyclientid(@RequestParam Long id) {
 
@@ -91,7 +90,7 @@ public class livraisonsController {
                 .toList();
     }
 
-    // ✅ Between dates
+
     @GetMapping("/dates")
     public List<LivraisionDTO> findbetweendates(
             @RequestParam LocalDate date1,
@@ -103,7 +102,6 @@ public class livraisonsController {
                 .toList();
     }
 
-    // ✅ By destination
     @GetMapping("/destination")
     public List<LivraisionDTO> findbydestinationadress(@RequestParam String ville) {
 

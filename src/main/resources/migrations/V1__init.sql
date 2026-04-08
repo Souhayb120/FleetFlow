@@ -10,14 +10,16 @@ CREATE TABLE chauffeur (
                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
                            nom VARCHAR(100) NOT NULL,
                            phone VARCHAR(20),
-                           permis_type VARCHAR(50)
+                           permis_type VARCHAR(50),
+                           isDisponible BOOLEAN DEFAULT TRUE
+
 );
 
 CREATE TABLE vehicule (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           matricule VARCHAR(50) UNIQUE,
                           capacite INT,
-                          disponible BOOLEAN DEFAULT TRUE,
+                          statut VARCHAR(50),
                           type VARCHAR(50)
 );
 

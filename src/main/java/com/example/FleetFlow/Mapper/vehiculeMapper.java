@@ -6,10 +6,8 @@ import org.mapstruct.Mapping;
 
     @Mapper(componentModel = "spring")
     public interface vehiculeMapper {
-
             @Mapping(source = "chauffeur.id", target = "chauffeurId")
             VehiculeDTO toDTO(Vehicule vehicule);
-
             @Mapping(source = "chauffeurId", target = "chauffeur.id")
             Vehicule toEntity(VehiculeDTO vehiculeDTO);
     }

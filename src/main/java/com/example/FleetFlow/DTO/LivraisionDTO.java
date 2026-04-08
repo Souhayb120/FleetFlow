@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LivraisionDTO {
-        private Long id;
-
         @NotNull
         private LocalDate dateLivraison;
 

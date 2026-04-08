@@ -19,9 +19,8 @@ private Long id;
 
     private String matricule;
     private int capacite;
-    private boolean disponible = true;
+    private String Statut ;
     private String type;
-
 
 
     @ManyToOne

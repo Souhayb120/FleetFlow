@@ -13,12 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VehiculeDTO {
-        private Long id;
         @NotBlank
         private String matricule;
         @Positive
         private int capacite;
-        private boolean disponible;
+        private String statut;
         @NotBlank
         private String type;
         @NotNull
