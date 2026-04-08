@@ -22,4 +22,8 @@ public interface LivraisonRepository  extends JpaRepository<Livraison,Long>{
     @Query("SELECT l from Livraison l where l.chauffeur.isDisponible = true")
     List<Livraison>findByChauffeurIsDisponible();
 
+
+
+    int countLivraisonByVehicule();
+
 }

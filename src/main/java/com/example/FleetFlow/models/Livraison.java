@@ -11,6 +11,15 @@ public class Livraison {
     private String adresseDepart;
     private String adresseDestination;
     private String statut;
+    private int totalVehculeLivraison;
+
+    public int getTotalVehculeLivraison() {
+        return totalVehculeLivraison;
+    }
+
+    public void setTotalVehculeLivraison(int totalVehculeLivraison) {
+        this.totalVehculeLivraison = totalVehculeLivraison;
+    }
 
     @ManyToOne
     @JoinColumn(name = "client_id")

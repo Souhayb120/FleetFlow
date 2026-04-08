@@ -29,11 +29,9 @@ public void supprimzeVehicule(Long id){
         vehculeRepository.deleteById(id);
 }
 
-
 public List<Vehicule> findbystatut(String statut){
         return vehculeRepository.findByStatut(statut);
 }
-
 public List<Vehicule>findgreteCapacitythan(int capacity){
         return vehculeRepository.findByCapaciteGreaterThan(capacity);
 }
