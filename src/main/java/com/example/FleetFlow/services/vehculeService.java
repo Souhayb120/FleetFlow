@@ -22,9 +22,7 @@ public class vehculeService {
 public void supprimzeVehicule(Long id){
         vehculeRepository.deleteById(id);
 }
-public List <Vehicule> listerVehicule(){
-        return vehculeRepository.findByDisponibleIsTrue();
-}
+
 
 public List<Vehicule> findbystatut(String statut){
         return vehculeRepository.findBystatut(statut);

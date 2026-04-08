@@ -24,10 +24,7 @@ return vehculeService.ajouterVehicule(v);
 public void supprimer(@PathVariable long id){
      vehculeService.supprimzeVehicule(id);
 }
-@GetMapping("/disponiblesVehicules")
-public List<Vehicule> vehicules(){
-return vehculeService.listerVehicule();
-}
+
 
 @GetMapping("/statut")
 public List<Vehicule> findbystatut(String statut){

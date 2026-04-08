@@ -31,8 +31,8 @@ public class livraisionService {
         Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).get();
         Vehicule vehicule = vehiculeRepository.findById(vehiculeId).get();
         chauffeur.setIsDisponible(false);
-        vehicule.setDisponible(false);
-        livraison.setStatut("Occuppier");
+        vehicule.setStatut("Occuppier");
+        livraison.setStatut("ENCOURS");
 
         livraison.setChauffeur(chauffeur);
         livraison.setVehicule(vehicule);
