@@ -7,10 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface vehculeRepository extends JpaRepository<Vehicule,Long> {
-List<Vehicule> findByStatutIsTrue();
     List<Vehicule> findByStatut(String statut);
 @Query("SELECT v FROM Vehicule v where v.capacite > :thisCapcity")
-    List<Vehicule> findByCapaciteGreaterThan(int capacity);
-
-
+    List<Vehicule> findByCapaciteGreaterThan(int thisCapcity);
 }

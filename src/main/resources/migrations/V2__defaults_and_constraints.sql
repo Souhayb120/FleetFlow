@@ -10,7 +10,7 @@ ADD CONSTRAINT fk_vehicule
 FOREIGN KEY (vehicule_id) REFERENCES vehicule(id);
 
 
-ALTER TABLE vehicle
+ALTER TABLE vehicule
 ADD CONSTRAINT fk_chauffeur
 FOREIGN KEY (chauffeur_id) REFERENCES chauffeur(id);
 
@@ -21,11 +21,9 @@ ALTER TABLE chauffeur
 ALTER TABLE livraison
     ALTER COLUMN statut SET DEFAULT 'ENATTENTE';
 
-ALTER TABLE vehicle
-    ALTER COLUMN disponible SET DEFAULT true;
+ALTER TABLE vehicule
+ALTER COLUMN statut SET DEFAULT 'Disponible';
 
-
-
-ALTER TABLE vehicle
+ALTER TABLE vehicule
     ADD CONSTRAINT chk_capacite CHECK (capacite > 0);
 

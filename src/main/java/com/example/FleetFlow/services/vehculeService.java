@@ -21,7 +21,9 @@ public class vehculeService {
     private LivraisonRepository livraisionRepository;
 
     public Vehicule ajouterVehicule(VehiculeDTO  v){
+
         return vehculeRepository.save(vehiculeMapper.toEntity(v));
+
     }
 
     public Vehicule modifierVehicule(Long id , Vehicule v){
@@ -32,9 +34,10 @@ public void supprimzeVehicule(Long id){
         vehculeRepository.deleteById(id);
 }
 
-public List <Vehicule> listerVehicule(){
-        return vehculeRepository.findByStatutIsTrue();
-}
+    public List<VehiculeDTO> listerVehicule() {
+        List<Vehicule> vehicules = vehculeRepository.findAll();
+        return vehiculeMapper.toDTO(vehicules);
+    }
 
 public List<Vehicule> findbystatut(String statut){
         return vehculeRepository.findByStatut(statut);
