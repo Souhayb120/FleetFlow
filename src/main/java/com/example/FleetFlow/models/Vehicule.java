@@ -1,5 +1,6 @@
 package com.example.FleetFlow.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,18 +20,15 @@ private Long id;
 
     private String matricule;
     private int capacite;
-<<<<<<< Ayoub_Branch
-    private String Statut ;
+    private String statut ;
     private String type;
 
 
-=======
-    private String statut;
-    private String type;
-
->>>>>>> main
     @ManyToOne
     @JoinColumn(name = "chauffeur_id")
+    @JsonBackReference
     private Chauffeur chauffeur;
+
+
 
 }

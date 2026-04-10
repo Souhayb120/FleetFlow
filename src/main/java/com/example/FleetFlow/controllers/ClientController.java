@@ -2,7 +2,7 @@ package com.example.FleetFlow.controllers;
 
 import com.example.FleetFlow.DTO.ClientDTO;
 import com.example.FleetFlow.DTO.CreateClientDTO;
-import com.example.FleetFlow.Exceptions.ResourceNotFoundException;
+
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.services.ClientService;
 import jakarta.validation.Valid;
