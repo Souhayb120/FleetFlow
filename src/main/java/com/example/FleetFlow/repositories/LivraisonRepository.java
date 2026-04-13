@@ -22,4 +22,8 @@ public interface LivraisonRepository  extends JpaRepository<Livraison,Long>{
     List<Livraison> findByChauffeurIsDisponible();
 
 
+
+
+
+
 }
