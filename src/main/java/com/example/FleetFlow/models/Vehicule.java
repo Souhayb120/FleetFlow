@@ -19,16 +19,11 @@ private Long id;
 
     private String matricule;
     private int capacite;
-<<<<<<< Ayoub_Branch
     private String Statut ;
     private String type;
 
 
-=======
-    private String statut;
-    private String type;
 
->>>>>>> main
     @ManyToOne
     @JoinColumn(name = "chauffeur_id")
     private Chauffeur chauffeur;

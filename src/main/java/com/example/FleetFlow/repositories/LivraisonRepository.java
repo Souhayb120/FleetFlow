@@ -24,6 +24,6 @@ public interface LivraisonRepository  extends JpaRepository<Livraison,Long>{
 
 
 
-    int countLivraisonByVehicule();
+
 
 }

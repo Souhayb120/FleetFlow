@@ -67,15 +67,6 @@ public class livraisionService {
         return livraisionRepository.findByChauffeurIsDisponible();
     }
 
-    public List<Livraison> countLiv(){
 
-        List<Livraison>  livraisonList =  livraisionRepository.findAll();
-        livraisionRepository.countLivraisonByVehicule();
-        for(Livraison livraison : livraisonList){
-
-        }
-
-
-    }
 
 }
