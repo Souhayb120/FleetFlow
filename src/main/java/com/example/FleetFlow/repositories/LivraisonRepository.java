@@ -22,6 +22,10 @@ public interface LivraisonRepository  extends JpaRepository<Livraison,Long>{
     List<Livraison> findByChauffeurIsDisponible();
 
 
+    @Query("SELECT l FROM Livraison l JOIN l.vehicule v WHERE v.statut ='availbe'")
+    List<Livraison> findLivraisonByVehicule_Statut();
+
+
 
 
 

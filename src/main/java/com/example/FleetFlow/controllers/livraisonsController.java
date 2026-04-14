@@ -110,4 +110,22 @@ public class livraisonsController {
                 .map(livraisionMapper::toDTO)
                 .toList();
     }
+
+    @GetMapping("/livraisonByChauffeurDisponible")
+    public List<LivraisionDTO> findbydestinationadress() {
+
+        return livraisionServices.getLivraisonByChauffeurIsDisponible()
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/livraisonByVehculeStatusIsDisponible")
+    public List<LivraisionDTO> findlivraisonByVehculeStatusIsDisponible() {
+
+        return livraisionServices.getLivraisonByStatusIsDisponible()
+                .stream()
+                .map(livraisionMapper::toDTO)
+                .toList();
+    }
 }

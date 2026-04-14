@@ -68,5 +68,12 @@ public class livraisionService {
     }
 
 
+    public List<Livraison> getLivraisonByChauffeurIsDisponible(){
+        return livraisionRepository.findByChauffeurIsDisponible();
+    }
+
+    public List<Livraison> getLivraisonByStatusIsDisponible(){
+        return livraisionRepository.findLivraisonByVehicule_Statut();
+    }
 
 }

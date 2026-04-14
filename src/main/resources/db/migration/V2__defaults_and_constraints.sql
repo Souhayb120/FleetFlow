@@ -33,3 +33,5 @@ ALTER TABLE vehicule
 
 ALTER TABLE vehicule
     ADD CONSTRAINT chk_capacite CHECK (capacite > 0);
+
+

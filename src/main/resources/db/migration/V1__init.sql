@@ -29,3 +29,4 @@ CREATE TABLE livraison (
                            adresse_destination VARCHAR(255),
                            statut VARCHAR(50)
 );
+
