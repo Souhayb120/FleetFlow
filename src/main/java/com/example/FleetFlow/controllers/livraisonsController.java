@@ -3,7 +3,7 @@ package com.example.FleetFlow.controllers;
 import com.example.FleetFlow.DTO.LivraisionDTO;
 import com.example.FleetFlow.Mapper.LivraisionMapper;
 import com.example.FleetFlow.models.Livraison;
-import com.example.FleetFlow.services.livraisionService;
+import com.example.FleetFlow.services.LivraisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class livraisonsController {
 
     @Autowired
-    private livraisionService livraisionServices;
+    private LivraisionService livraisionServices;
 
     @Autowired
     private LivraisionMapper livraisionMapper;

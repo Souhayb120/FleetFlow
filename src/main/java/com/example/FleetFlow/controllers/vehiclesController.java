@@ -3,7 +3,7 @@
     import com.example.FleetFlow.DTO.VehiculeDTO;
     import com.example.FleetFlow.Mapper.vehiculeMapper;
     import com.example.FleetFlow.models.Vehicule;
-    import com.example.FleetFlow.services.vehculeService;
+    import com.example.FleetFlow.services.VehculeService;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@
     @RequestMapping("/vehicules")
     public class vehiclesController {
     @Autowired
-    private vehculeService vehculeService;
+    private VehculeService vehculeService;
     @Autowired
     private vehiculeMapper vehiculeMapper;
     @PostMapping
