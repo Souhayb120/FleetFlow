@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-    public interface vehiculeMapper {
+    public interface VehiculeMapper {
             @Mapping(source = "chauffeur.id", target = "chauffeurId")
             VehiculeDTO toDTO(Vehicule vehicule);
             List<VehiculeDTO> toDTO(List<Vehicule> vehicules);

@@ -5,7 +5,7 @@ import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.models.Vehicule;
 import com.example.FleetFlow.repositories.LivraisonRepository;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
-import com.example.FleetFlow.repositories.vehculeRepository;
+import com.example.FleetFlow.repositories.VehculeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class LivraisionService {
     @Autowired
     private ChauffeurRepository chauffeurRepository;
     @Autowired
-    private vehculeRepository vehiculeRepository;
+    private VehculeRepository vehiculeRepository;
 
     public Livraison creeLivraision(Livraison l){
         l.setStatut("EN_ATTENTE");

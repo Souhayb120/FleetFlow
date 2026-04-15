@@ -1,7 +1,7 @@
     package com.example.FleetFlow.controllers;
 
     import com.example.FleetFlow.DTO.VehiculeDTO;
-    import com.example.FleetFlow.Mapper.vehiculeMapper;
+    import com.example.FleetFlow.Mapper.VehiculeMapper;
     import com.example.FleetFlow.models.Vehicule;
     import com.example.FleetFlow.services.VehculeService;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,11 @@
 
     @RestController
     @RequestMapping("/vehicules")
-    public class vehiclesController {
+    public class VehiclesController {
     @Autowired
     private VehculeService vehculeService;
     @Autowired
-    private vehiculeMapper vehiculeMapper;
+    private VehiculeMapper vehiculeMapper;
     @PostMapping
 
     public Vehicule ajouterVehucle(@RequestBody VehiculeDTO v){

@@ -1,10 +1,10 @@
 package com.example.FleetFlow.services;
 
 import com.example.FleetFlow.DTO.VehiculeDTO;
-import com.example.FleetFlow.Mapper.vehiculeMapper;
+import com.example.FleetFlow.Mapper.VehiculeMapper;
 import com.example.FleetFlow.models.Vehicule;
 import com.example.FleetFlow.repositories.LivraisonRepository;
-import com.example.FleetFlow.repositories.vehculeRepository;
+import com.example.FleetFlow.repositories.VehculeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class VehculeService {
     @Autowired
-    private vehculeRepository vehculeRepository;
+    private VehculeRepository vehculeRepository;
     @Autowired
-    private vehiculeMapper vehiculeMapper;
+    private VehiculeMapper vehiculeMapper;
     @Autowired
     private LivraisonRepository livraisionRepository;
 
