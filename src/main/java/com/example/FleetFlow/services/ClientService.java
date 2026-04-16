@@ -12,20 +12,25 @@ import java.util.List;
 
 @Service
 public class ClientService {
-final private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
+    private final ClientMapper mapper;
 
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, ClientMapper mapper) {
         this.clientRepository = clientRepository;
+        this.mapper = mapper;
     }
-    @Autowired
-    private ClientMapper mapper;
 
     public void ajouterClient(CreateClientDTO client){
-      clientRepository.save(mapper.toEntity(client));
+        if(!clientRepository.existsByEmail(client.getEmail())){
+            clientRepository.save(mapper.toEntity(client));
+        }
     }
 
     public void deleteClient(int id){
-        clientRepository.deleteById(id);
+        if(clientRepository.existsById(id)){
+            clientRepository.deleteById(id);
+        }
+
     }
 
         public List<ClientDTO> afficherClients(){

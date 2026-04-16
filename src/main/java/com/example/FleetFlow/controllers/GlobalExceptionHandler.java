@@ -8,10 +8,8 @@ import java.util.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String,String>> handleValidation(
-            MethodArgumentNotValidException ex){
+    public ResponseEntity<Map<String,String>> handleValidation(MethodArgumentNotValidException ex){
 
         Map<String,String> errors = new HashMap<>();
 

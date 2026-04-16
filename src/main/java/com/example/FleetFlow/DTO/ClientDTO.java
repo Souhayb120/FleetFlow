@@ -8,6 +8,7 @@ import lombok.*;
 public class ClientDTO {
     private String nom;
     private String email;
+    private int age;
     private String phone;
     private int nombreLivraison;
 }
