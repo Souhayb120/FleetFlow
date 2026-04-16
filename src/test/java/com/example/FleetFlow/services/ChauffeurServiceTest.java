@@ -39,7 +39,6 @@ class ChauffeurServiceTest {
     public void setUp(){
         chauffeurDTO = new ChauffeurDTO();
         chauffeurDTO.setNom("Ali");
-
         chauffeur = new Chauffeur();
         chauffeur.setNom("Ali");
     }
