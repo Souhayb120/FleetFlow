@@ -25,23 +25,23 @@ public class LivraisionService {
         l.setStatut("EN_ATTENTE");
         return livraisionRepository.save(l);
     }
-    public Livraison assigner(Long livraisonId, Integer chauffeurId, Long vehiculeId) {
+        public Livraison assigner(Long livraisonId, Integer chauffeurId, Long vehiculeId) {
 
-        Livraison livraison = livraisionRepository.findById(livraisonId).get();
-        Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).get();
-        Vehicule vehicule = vehiculeRepository.findById(vehiculeId).get();
-        chauffeur.setIsDisponible(false);
-        vehicule.setStatut("Occuppier");
-        livraison.setStatut("ENCOURS");
+            Livraison livraison = livraisionRepository.findById(livraisonId).orElseThrow(() -> new RuntimeException("Not Found"));;
+            Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).orElseThrow(() -> new RuntimeException("Not Found"));
+            Vehicule vehicule = vehiculeRepository.findById(vehiculeId).orElseThrow(() -> new RuntimeException("Not Found"));
+            chauffeur.setIsDisponible(false);
+            vehicule.setStatut("Occuppier");
+            livraison.setStatut("ENCOURS");
 
-        livraison.setChauffeur(chauffeur);
-        livraison.setVehicule(vehicule);
+            livraison.setChauffeur(chauffeur);
+            livraison.setVehicule(vehicule);
 
-        return livraisionRepository.save(livraison);
-    }
+            return livraisionRepository.save(livraison);
+        }
     public Livraison updateStatut(Long id, String statut) {
 
-        Livraison livraison = livraisionRepository.findById(id).get();
+        Livraison livraison = livraisionRepository.findById(id).orElseThrow(() -> new RuntimeException("Livraison not found"));
         livraison.setStatut(statut);
 
         return livraisionRepository.save(livraison);
