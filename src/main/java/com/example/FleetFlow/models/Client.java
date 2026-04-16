@@ -21,8 +21,11 @@ public class Client {
     private Integer id;
     private String nom;
     private String email;
+    private int age;
     private String phone;
     @OneToMany(mappedBy = "client")
     private List<Livraison> livraisonList;
 
+    public Client(String ayoub, String mail, String number) {
+    }
 }

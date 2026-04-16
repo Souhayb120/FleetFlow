@@ -15,14 +15,12 @@ import java.util.List;
 @Service
 public class ChauffeurService {
 
-    @Autowired
-    private ChauffeurMapper mapper;
-    @Autowired
-    private ChauffeurRepository chauffeurRepository;
 
+    private final ChauffeurMapper mapper;
+    private final ChauffeurRepository chauffeurRepository;
 
-
-    public ChauffeurService(ChauffeurRepository chauffeurRepository) {
+    public ChauffeurService(ChauffeurMapper mapper, ChauffeurRepository chauffeurRepository) {
+        this.mapper = mapper;
         this.chauffeurRepository = chauffeurRepository;
     }
 

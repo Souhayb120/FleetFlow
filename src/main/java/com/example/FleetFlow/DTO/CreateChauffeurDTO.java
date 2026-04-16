@@ -14,4 +14,6 @@ public class CreateChauffeurDTO {
     private String phone;
     @NotBlank(message = "Permis Type is mandatory")
     private String permisType;
+    @NotBlank(message = "age Type is mandatory")
+    private int age;
 }
