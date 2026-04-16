@@ -11,10 +11,6 @@ public class Livraison {
     private String adresseDepart;
     private String adresseDestination;
     private String statut;
-
-
-
-
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
