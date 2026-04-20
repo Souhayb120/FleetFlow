@@ -4,8 +4,8 @@ name: fleetFlow_CI
 on:
   push:
     branches:
-    - [ "main" ]
-    - [ "souhayb" ]
+    - main
+    - souhayb
 
   pull_request:
     branches: [ "main" ]
