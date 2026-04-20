@@ -31,4 +31,14 @@ public class Chauffeur {
     @JsonManagedReference
     private List<Vehicule> vichelList;
 
+
+
+    public String sayHi(String name){
+        return name;
+    }
+
+    public String sayHi(String name , String firstName){
+        return name + firstName;
+    }
+
 }
