@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Chauffeur {
+public class Chauffeur   {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
