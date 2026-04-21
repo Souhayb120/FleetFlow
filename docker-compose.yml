@@ -21,7 +21,7 @@ services:
     container_name: mysql_db
     restart: always
     ports:
-      - "3308:3306"   # host:container
+      - "3308:3306"
     environment:
       MYSQL_DATABASE: fleetflow2
       MYSQL_ROOT_PASSWORD: AyoubHadi120
