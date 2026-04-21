@@ -4,6 +4,7 @@ import com.example.FleetFlow.DTO.LivraisionDTO;
 import com.example.FleetFlow.Mapper.LivraisionMapper;
 import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.services.LivraisionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class LivraisonsController {
 
 
     @PostMapping
-    public LivraisionDTO creatLivraision(@RequestBody LivraisionDTO dto) {
+    public LivraisionDTO creatLivraision(@RequestBody @Valid LivraisionDTO dto) {
 
         Livraison livraison = livraisionMapper.toEntity(dto);
         Livraison saved = livraisionServices.creeLivraision(livraison);
