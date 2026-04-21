@@ -5,7 +5,7 @@ import com.example.FleetFlow.DTO.CreateClientDTO;
 import com.example.FleetFlow.models.Client;
 import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
-public interface ClientMapper {
+public interface ClientMapper  {
         ClientDTO toDTO(Client client);
         Client toEntity(CreateClientDTO client);
 }

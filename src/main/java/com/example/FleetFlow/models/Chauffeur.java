@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Chauffeur {
+public class Chauffeur   {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,5 +30,15 @@ public class Chauffeur {
     @OneToMany(mappedBy = "chauffeur")
     @JsonManagedReference
     private List<Vehicule> vichelList;
+
+
+
+    public String sayHi(String name){
+        return name;
+    }
+
+    public String sayHi(String name , String firstName){
+        return name + firstName;
+    }
 
 }
