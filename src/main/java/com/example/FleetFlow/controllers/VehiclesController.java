@@ -4,6 +4,7 @@
     import com.example.FleetFlow.Mapper.VehiculeMapper;
     import com.example.FleetFlow.models.Vehicule;
     import com.example.FleetFlow.services.VehculeService;
+    import jakarta.validation.Valid;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@
     private VehiculeMapper vehiculeMapper;
     @PostMapping
 
-    public Vehicule ajouterVehucle(@RequestBody VehiculeDTO v){
+    public Vehicule ajouterVehucle(@RequestBody @Valid VehiculeDTO v){
     return vehculeService.ajouterVehicule(v);
     }
 
