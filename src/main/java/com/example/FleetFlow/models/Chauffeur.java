@@ -15,11 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Chauffeur   {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String nom;
+public class Chauffeur extends User {
     private String phone;
     private String permisType;
     private Boolean isDisponible = true;
@@ -30,15 +26,4 @@ public class Chauffeur   {
     @OneToMany(mappedBy = "chauffeur")
     @JsonManagedReference
     private List<Vehicule> vichelList;
-
-
-
-    public String sayHi(String name){
-        return name;
-    }
-
-    public String sayHi(String name , String firstName){
-        return name + firstName;
-    }
-
 }

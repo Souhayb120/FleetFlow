@@ -2,6 +2,7 @@
 
     import com.example.FleetFlow.DTO.VehiculeDTO;
     import com.example.FleetFlow.Mapper.VehiculeMapper;
+    import com.example.FleetFlow.enums.VehiculeStatut;
     import com.example.FleetFlow.models.Vehicule;
     import com.example.FleetFlow.services.VehiculeServiceImpl;
     import jakarta.validation.Valid;
@@ -17,21 +18,19 @@
     private VehiculeServiceImpl vehiculeServiceImpl;
     @Autowired
     private VehiculeMapper vehiculeMapper;
-    @PostMapping
 
+    @PostMapping("/ajouterVehicule")
     public Vehicule ajouterVehucle(@RequestBody @Valid VehiculeDTO v){
     return vehiculeServiceImpl.ajouterVehicule(v);
     }
-
-        @PutMapping("/{id}")
-        public VehiculeDTO modifierVehicule(@PathVariable Long id,
-                                            @RequestBody VehiculeDTO dto) {
+    @PutMapping("/modifierVehicule/{id}")
+        public VehiculeDTO modifierVehicule(@PathVariable Long id,@RequestBody VehiculeDTO dto) {
             Vehicule vehicule = vehiculeMapper.toEntity(dto);
             Vehicule updated = vehiculeServiceImpl.modifierVehicule(id, vehicule);
             return vehiculeMapper.toDTO(updated);
         }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/supprimer/{id}")
     public void supprimer(@PathVariable long id){
          vehiculeServiceImpl.supprimzeVehicule(id);
     }
@@ -40,12 +39,12 @@
     return vehiculeServiceImpl.listerVehicule();
     }
 
-    @GetMapping("/statut")
-    public List<Vehicule> findbystatut(@RequestParam String statut){
+    @GetMapping("/findbystatut")
+    public List<Vehicule> findbystatut(@RequestParam VehiculeStatut statut){{
         return vehiculeServiceImpl.findbystatut(statut);
     }
-
-    @GetMapping("/capacity")
+    }
+    @GetMapping("/findGreaterCapacitythan")
         public List<Vehicule> findGreaterCapacitythan(@RequestParam int capacity){
         return vehiculeServiceImpl.findgreteCapacitythan(capacity);
     }

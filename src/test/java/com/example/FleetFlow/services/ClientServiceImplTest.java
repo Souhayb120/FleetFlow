@@ -1,6 +1,6 @@
 package com.example.FleetFlow.services;
 
-import com.example.FleetFlow.DTO.CreateClientDTO;
+import com.example.FleetFlow.DTO.RequestClientDTO;
 import com.example.FleetFlow.Mapper.ClientMapper;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.repositories.ClientRepository;
@@ -23,12 +23,12 @@ class ClientServiceImplTest {
     @Mock
     private ClientRepository clientRepository;
 
-    private CreateClientDTO clientDTO;
+    private RequestClientDTO clientDTO;
     private Client client;
 
     @org.junit.jupiter.api.BeforeEach
     public void setUp(){
-        clientDTO = new CreateClientDTO("ayoub","ayoub@gmail.com","5634534");
+        clientDTO = new RequestClientDTO("ayoub","ayoub@gmail.com","5634534");
         client = new Client();
     }
 

@@ -1,6 +1,6 @@
 package com.example.FleetFlow.services;
 
-import com.example.FleetFlow.DTO.ChauffeurDTO;
+import com.example.FleetFlow.DTO.ResponceChauffeurDTO;
 import com.example.FleetFlow.Mapper.ChauffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
@@ -27,13 +27,13 @@ class ChauffeurServiceImplTest {
     @Mock
     private ChauffeurRepository chauffeurRepository;
 
-    private ChauffeurDTO chauffeurDTO;
+    private ResponceChauffeurDTO responceChauffeurDTO;
     private Chauffeur chauffeur;
 
     @org.junit.jupiter.api.BeforeEach
     public void setUp(){
-        chauffeurDTO = new ChauffeurDTO();
-        chauffeurDTO.setNom("Ali");
+        responceChauffeurDTO = new ResponceChauffeurDTO();
+        responceChauffeurDTO.setNom("Ali");
         chauffeur = new Chauffeur();
         chauffeur.setNom("Ali");
     }
@@ -42,8 +42,8 @@ class ChauffeurServiceImplTest {
     @Test
     void findByDisponibility() {
         when(chauffeurRepository.findByIsDisponibleTrue()).thenReturn(List.of(chauffeur));
-        when(mapper.toDTO(chauffeur)).thenReturn(chauffeurDTO);
-        List<ChauffeurDTO> result = chauffeurServiceImpl.findByDisponibility();
+        when(mapper.toDTO(chauffeur)).thenReturn(responceChauffeurDTO);
+        List<ResponceChauffeurDTO> result = chauffeurServiceImpl.findByDisponibility();
         assertNotNull(result);
         verify(chauffeurRepository, times(1)).findByIsDisponibleTrue();
         verify(mapper, times(1)).toDTO(chauffeur);

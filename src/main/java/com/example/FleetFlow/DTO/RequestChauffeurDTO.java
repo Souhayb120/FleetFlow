@@ -3,14 +3,11 @@ package com.example.FleetFlow.DTO;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateChauffeurDTO {
-    @NotBlank(message = "Name is mandatory")
-    private String nom;
-    @NotBlank(message = "Phone NUmber is mandatory")
+public class RequestChauffeurDTO extends RegisterUserDTO{
+    @NotBlank(message = "Phone Number is mandatory")
     private String phone;
     @NotBlank(message = "Permis Type is mandatory")
     private String permisType;

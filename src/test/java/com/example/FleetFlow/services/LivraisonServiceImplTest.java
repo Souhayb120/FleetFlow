@@ -38,7 +38,7 @@
 
             livraisonServiceImpl.creeLivraision(livraison);
 
-            assertEquals("EN_ATTENTE",livraison.getStatut());;
+            assertEquals("EN_ATTENTE",livraison.getLivraisionStatut());;
         }
         @Test
         void shouldAAssignerChauffeurVehiculeAuneLivraison(){
@@ -61,7 +61,7 @@
             assertEquals(chauffeur,rs.getChauffeur());
             assertEquals(vehicule,rs.getVehicule());
 
-            assertEquals("ENCOURS",rs.getStatut());
+            assertEquals("ENCOURS",rs.getLivraisionStatut());
             assertEquals("Occuppier",vehicule.getStatut());
 
             assertFalse(chauffeur.getIsDisponible());
@@ -73,7 +73,7 @@
             // GIVEN
             Long id = 1L;
             Livraison livraison = new Livraison();
-            livraison.setStatut("EN_ATTENTE");
+            livraison.setLivraisionStatut("EN_ATTENTE");
 
             String newStatut = "ENCOURS";
 
@@ -87,6 +87,6 @@
             Livraison rs = livraisonServiceImpl.updateStatut(id, newStatut);
 
             // THEN
-            assertEquals(newStatut, rs.getStatut());
+            assertEquals(newStatut, rs.getLivraisionStatut());
         }
     }

@@ -17,7 +17,7 @@ CREATE TABLE vehicule (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           matricule VARCHAR(50) UNIQUE NOT NULL,
                           capacite INT,
-                          statut VARCHAR(50) ,
+                          livraisionStatut VARCHAR(50) ,
                           type VARCHAR(50)
 );
 
@@ -27,5 +27,5 @@ CREATE TABLE livraison (
                            date_livraison DATE,
                            adresse_depart VARCHAR(255),
                            adresse_destination VARCHAR(255),
-                           statut VARCHAR(50)
+                           livraisionStatut VARCHAR(50)
 );

@@ -5,9 +5,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
-    private String nom;
-    private String email;
+public class ResponceClientDTO extends  ResponseUserDTO {
     private int age;
     private String phone;
     private int nombreLivraison;

@@ -1234,7 +1234,7 @@
 											"top": 202,
 											"width": 183,
 											"height": 13,
-											"text": "+statut: String",
+											"text": "+livraisionStatut: String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1305,7 +1305,7 @@
 											"top": 39,
 											"width": 206,
 											"height": 13,
-											"text": "+Modifier statut livraison()",
+											"text": "+Modifier livraisionStatut livraison()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2683,7 +2683,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGdP4wKcTmw208="
 							},
-							"name": "statut",
+							"name": "livraisionStatut",
 							"type": "String"
 						}
 					],
@@ -2710,7 +2710,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGdP4wKcTmw208="
 							},
-							"name": "Modifier statut livraison"
+							"name": "Modifier livraisionStatut livraison"
 						},
 						{
 							"_type": "UMLOperation",

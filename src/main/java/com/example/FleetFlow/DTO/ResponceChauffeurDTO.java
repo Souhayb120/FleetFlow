@@ -5,8 +5,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChauffeurDTO {
-    private String nom;
+public class ResponceChauffeurDTO extends ResponseUserDTO {
     private String phone;
     private String permisType;
     private Boolean isDisponible;

@@ -1,5 +1,7 @@
 package com.example.FleetFlow.services;
 
+import com.example.FleetFlow.enums.LivraisionStatut;
+import com.example.FleetFlow.enums.VehiculeStatut;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.models.Vehicule;
@@ -23,36 +25,38 @@ public class LivraisonServiceImpl implements LivraisonService {
     private VehculeRepository vehiculeRepository;
 
     public Livraison creeLivraision(Livraison l){
-        l.setStatut("EN_ATTENTE");
+        l.setLivraisionStatut(LivraisionStatut.EN_ATTENTE);
         return livraisionRepository.save(l);
     }
-        public Livraison assigner(Long livraisonId, Integer chauffeurId, Long vehiculeId) {
+        public Livraison assigner(Long livraisonId, Long chauffeurId, Long vehiculeId) {
 
             Livraison livraison = livraisionRepository.findById(livraisonId).orElseThrow(() -> new RuntimeException("Not Found"));;
             Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).orElseThrow(() -> new RuntimeException("Not Found"));
             Vehicule vehicule = vehiculeRepository.findById(vehiculeId).orElseThrow(() -> new RuntimeException("Not Found"));
             chauffeur.setIsDisponible(false);
-            vehicule.setStatut("Occuppier");
-            livraison.setStatut("ENCOURS");
+            vehicule.setStatut(VehiculeStatut.EN_SERVICE);
+            livraison.setLivraisionStatut(LivraisionStatut.EN_COURS);
 
             livraison.setChauffeur(chauffeur);
             livraison.setVehicule(vehicule);
 
             return livraisionRepository.save(livraison);
         }
-    public Livraison updateStatut(Long id, String statut) {
 
+    public Livraison updateStatut(Long id, LivraisionStatut livraisionStatut) {
         Livraison livraison = livraisionRepository.findById(id).orElseThrow(() -> new RuntimeException("Livraison not found"));
-        livraison.setStatut(statut);
-
+        livraison.setLivraisionStatut(livraisionStatut);
         return livraisionRepository.save(livraison);
     }
+
     public List<Livraison> getAll() {
         return livraisionRepository.findAll();
     }
-    public  List<Livraison> getbystatut(String statut){
-        return livraisionRepository.findByStatut(statut);
+
+    public  List<Livraison> getbystatut(LivraisionStatut livraisionStatut){
+        return livraisionRepository.findByStatut(livraisionStatut);
     }
+
     public List<Livraison> findbyclientId(Long id){
         return livraisionRepository.findByClientId(id);
     }
