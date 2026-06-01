@@ -6,20 +6,19 @@ import com.example.FleetFlow.DTO.CreateChauffeurDTO;
 import com.example.FleetFlow.Mapper.ChauffeurMapper;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
+import com.example.FleetFlow.serviceInterfaces.ChauffeurService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ChauffeurService {
+public class ChauffeurServiceImpl implements ChauffeurService {
 
 
     private final ChauffeurMapper mapper;
     private final ChauffeurRepository chauffeurRepository;
 
-    public ChauffeurService(ChauffeurMapper mapper, ChauffeurRepository chauffeurRepository) {
+    public ChauffeurServiceImpl(ChauffeurMapper mapper, ChauffeurRepository chauffeurRepository) {
         this.mapper = mapper;
         this.chauffeurRepository = chauffeurRepository;
     }

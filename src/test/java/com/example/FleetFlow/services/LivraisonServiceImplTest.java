@@ -19,7 +19,7 @@
     import static org.mockito.Mockito.when;
     @ExtendWith(MockitoExtension.class)
 
-    public class LivraisionServiceTest {
+    public class LivraisonServiceImplTest {
         @Mock
         private LivraisonRepository livraisonRepository;
         @Mock
@@ -28,7 +28,7 @@
         private VehculeRepository vehculeRepository;
 
         @InjectMocks
-        private LivraisionService livraisionService;
+        private LivraisonServiceImpl livraisonServiceImpl;
 
 
         @Test
@@ -36,7 +36,7 @@
 
             Livraison livraison = new Livraison();
 
-            livraisionService.creeLivraision(livraison);
+            livraisonServiceImpl.creeLivraision(livraison);
 
             assertEquals("EN_ATTENTE",livraison.getStatut());;
         }
@@ -55,7 +55,7 @@
             when(vehculeRepository.findById(vehiculeID)).thenReturn(Optional.of(vehicule));
             when(livraisonRepository.save(livraison)).thenReturn(livraison);
             //WHEN
-            Livraison rs = livraisionService.assigner(livraisionID,chauffeurID,vehiculeID);
+            Livraison rs = livraisonServiceImpl.assigner(livraisionID,chauffeurID,vehiculeID);
 
             //THEN
             assertEquals(chauffeur,rs.getChauffeur());
@@ -84,7 +84,7 @@
                     .thenReturn(livraison);
 
             // WHEN
-            Livraison rs = livraisionService.updateStatut(id, newStatut);
+            Livraison rs = livraisonServiceImpl.updateStatut(id, newStatut);
 
             // THEN
             assertEquals(newStatut, rs.getStatut());

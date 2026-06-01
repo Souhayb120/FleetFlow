@@ -4,23 +4,20 @@ import com.example.FleetFlow.DTO.CreateClientDTO;
 import com.example.FleetFlow.Mapper.ClientMapper;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.repositories.ClientRepository;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ClientServiceTest {
+class ClientServiceImplTest {
 
   
     @InjectMocks
-    private ClientService clientService;
+    private ClientServiceImpl clientServiceImpl;
     @Mock
     private ClientMapper mapper;
     @Mock
@@ -40,7 +37,7 @@ class ClientServiceTest {
     void ajouterClient() {
         when(mapper.toEntity(clientDTO)).thenReturn(client);
         when(clientRepository.existsByEmail(clientDTO.getEmail())).thenReturn(false);
-        clientService.ajouterClient(clientDTO);
+        clientServiceImpl.ajouterClient(clientDTO);
         verify(mapper, times(1)).toEntity(clientDTO);
         verify(clientRepository, times(1)).save(client);
 }
@@ -48,7 +45,7 @@ class ClientServiceTest {
     @Test
     void ajouterClientCheckEmailExists() {
         when(clientRepository.existsByEmail(clientDTO.getEmail())).thenReturn(true);
-        clientService.ajouterClient(clientDTO);
+        clientServiceImpl.ajouterClient(clientDTO);
         verify(clientRepository, never()).save(any());
     }
 
@@ -56,7 +53,7 @@ class ClientServiceTest {
     @Test
     void deleteClient() {
         when(clientRepository.existsById(1)).thenReturn(true);
-        clientService.deleteClient(1);
+        clientServiceImpl.deleteClient(1);
         verify(clientRepository, times(1)).deleteById(1);
     }
 }

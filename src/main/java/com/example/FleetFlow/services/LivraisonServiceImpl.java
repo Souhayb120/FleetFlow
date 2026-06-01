@@ -6,6 +6,7 @@ import com.example.FleetFlow.models.Vehicule;
 import com.example.FleetFlow.repositories.LivraisonRepository;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
 import com.example.FleetFlow.repositories.VehculeRepository;
+import com.example.FleetFlow.serviceInterfaces.LivraisonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class LivraisionService {
+public class LivraisonServiceImpl implements LivraisonService {
     @Autowired
     private LivraisonRepository livraisionRepository;
     @Autowired

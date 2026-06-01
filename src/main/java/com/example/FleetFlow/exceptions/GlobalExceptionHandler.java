@@ -1,4 +1,4 @@
-package com.example.FleetFlow.controllers;
+package com.example.FleetFlow.exceptions;
 
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;

@@ -5,7 +5,7 @@ import com.example.FleetFlow.DTO.ChauffeurDTO;
 import com.example.FleetFlow.DTO.CreateChauffeurDTO;
 
 import com.example.FleetFlow.models.Chauffeur;
-import com.example.FleetFlow.services.ChauffeurService;
+import com.example.FleetFlow.services.ChauffeurServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,42 +17,42 @@ import java.util.List;
 public class ChauffeurController {
 
     @Autowired
-    private ChauffeurService chauffeurService;
+    private ChauffeurServiceImpl chauffeurServiceImpl;
 
     @PostMapping
     public void saveChauffeur( @Valid @RequestBody CreateChauffeurDTO chauffeur){
-        chauffeurService.ajouterChauffeur(chauffeur);
+        chauffeurServiceImpl.ajouterChauffeur(chauffeur);
     }
 
     @GetMapping
     public List<ChauffeurDTO> displayChauffeurs(){
-        return chauffeurService.displayChauffeurs();
+        return chauffeurServiceImpl.displayChauffeurs();
     }
 
     @DeleteMapping("/{id}")
     public void deleteChauffeur(@PathVariable  int id){
-        chauffeurService.deleteChauffeur(id);
+        chauffeurServiceImpl.deleteChauffeur(id);
     }
 
     @PutMapping("/{id}")
     public Chauffeur updateChauffeur(@PathVariable int id,@RequestBody Chauffeur chauffeur){
-        return chauffeurService.updateChauffeur(id,chauffeur);
+        return chauffeurServiceImpl.updateChauffeur(id,chauffeur);
     }
 
     @GetMapping("/chaffeursDisponible")
     public List<ChauffeurDTO> findByIsDisponible(){
-        return chauffeurService.findByDisponibility();
+        return chauffeurServiceImpl.findByDisponibility();
     }
 
 
     @GetMapping("/{permisType}")
     public List<ChauffeurDTO> displayChauffeurs(@PathVariable String permisType ,Boolean isDisponible){
-        return chauffeurService.findByPermisTypeDisponible(permisType,isDisponible);
+        return chauffeurServiceImpl.findByPermisTypeDisponible(permisType,isDisponible);
     }
 
     @GetMapping("/displayChauffeurByNom")
     public List<String> displayChauffeursByNom(){
-        return chauffeurService.displayChauffeursByNom();
+        return chauffeurServiceImpl.displayChauffeursByNom();
     }
 
 

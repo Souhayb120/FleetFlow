@@ -1,14 +1,9 @@
 package com.example.FleetFlow.services;
 
 import com.example.FleetFlow.DTO.ChauffeurDTO;
-import com.example.FleetFlow.DTO.CreateChauffeurDTO;
-import com.example.FleetFlow.DTO.CreateClientDTO;
 import com.example.FleetFlow.Mapper.ChauffeurMapper;
-import com.example.FleetFlow.Mapper.ClientMapper;
 import com.example.FleetFlow.models.Chauffeur;
-import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
-import com.example.FleetFlow.repositories.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,11 +17,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ChauffeurServiceTest {
+class ChauffeurServiceImplTest {
 
 
     @InjectMocks
-    private ChauffeurService chauffeurService;
+    private ChauffeurServiceImpl chauffeurServiceImpl;
     @Mock
     private ChauffeurMapper mapper;
     @Mock
@@ -48,7 +43,7 @@ class ChauffeurServiceTest {
     void findByDisponibility() {
         when(chauffeurRepository.findByIsDisponibleTrue()).thenReturn(List.of(chauffeur));
         when(mapper.toDTO(chauffeur)).thenReturn(chauffeurDTO);
-        List<ChauffeurDTO> result = chauffeurService.findByDisponibility();
+        List<ChauffeurDTO> result = chauffeurServiceImpl.findByDisponibility();
         assertNotNull(result);
         verify(chauffeurRepository, times(1)).findByIsDisponibleTrue();
         verify(mapper, times(1)).toDTO(chauffeur);

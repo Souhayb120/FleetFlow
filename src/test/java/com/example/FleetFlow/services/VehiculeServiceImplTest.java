@@ -15,9 +15,9 @@ import static org.mockito.Mockito.when;
     @ExtendWith(MockitoExtension.class)
 
 
-public class VehculeServiceTest {
+public class VehiculeServiceImplTest {
     @InjectMocks
-    private VehculeService vehculeService;
+    private VehiculeServiceImpl vehiculeServiceImpl;
     @Mock
     private VehculeRepository vehculeRepository;
     @Test
@@ -32,7 +32,7 @@ public class VehculeServiceTest {
 
       when(vehculeRepository.findByStatut(statut)).thenReturn(vehicules);
 
-      List<Vehicule> rs = vehculeService.findbystatut(statut);
+      List<Vehicule> rs = vehiculeServiceImpl.findbystatut(statut);
 
         assertTrue(
               rs.stream()
@@ -53,7 +53,7 @@ public class VehculeServiceTest {
 
         when(vehculeRepository.findByCapaciteGreaterThan(capacity)).thenReturn(vehicules);
         //WHEN
-        List<Vehicule> rs = vehculeService.findgreteCapacitythan(capacity);
+        List<Vehicule> rs = vehiculeServiceImpl.findgreteCapacitythan(capacity);
 
         //THEN
         assertTrue(

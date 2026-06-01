@@ -5,17 +5,17 @@ import com.example.FleetFlow.DTO.CreateClientDTO;
 import com.example.FleetFlow.Mapper.ClientMapper;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.repositories.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.FleetFlow.serviceInterfaces.ClientService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClientService {
+public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper mapper;
 
-    public ClientService(ClientRepository clientRepository, ClientMapper mapper) {
+    public ClientServiceImpl(ClientRepository clientRepository, ClientMapper mapper) {
         this.clientRepository = clientRepository;
         this.mapper = mapper;
     }
@@ -44,6 +44,8 @@ public class ClientService {
                     })
                     .toList();
             }
+
+
 
     public Client updateClient(int id, Client newData){
         Client client = clientRepository.findById(id).orElse(null);
