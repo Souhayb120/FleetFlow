@@ -6,7 +6,7 @@ import com.example.FleetFlow.models.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public class UserMapper {
+public interface UserMapper {
     User ToEntity(RegisterUserDTO registerUserDTO);
     AuthenticationResponceDTO ToDTO(User user);
 

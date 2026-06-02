@@ -54,7 +54,7 @@ public class LivraisonServiceImpl implements LivraisonService {
     }
 
     public  List<Livraison> getbystatut(LivraisionStatut livraisionStatut){
-        return livraisionRepository.findByStatut(livraisionStatut);
+        return livraisionRepository.findByLivraisionStatut(livraisionStatut);
     }
 
     public List<Livraison> findbyclientId(Long id){

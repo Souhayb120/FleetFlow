@@ -2,10 +2,8 @@ package com.example.FleetFlow.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -15,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class Chauffeur extends User {
     private String phone;
     private String permisType;

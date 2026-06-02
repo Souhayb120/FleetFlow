@@ -29,6 +29,4 @@ public class Vehicule {
     @JsonBackReference
     private Chauffeur chauffeur;
 
-
-
 }

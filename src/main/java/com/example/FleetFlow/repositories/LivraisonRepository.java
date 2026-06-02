@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface LivraisonRepository  extends JpaRepository<Livraison,Long>{
-    List<Livraison>findByStatut(LivraisionStatut livraisionStatut);
+    List<Livraison>findByLivraisionStatut(LivraisionStatut livraisionStatut);
 
     List<Livraison>findByClientId(long id);
 

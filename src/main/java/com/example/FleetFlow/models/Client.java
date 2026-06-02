@@ -2,19 +2,19 @@ package com.example.FleetFlow.models;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
-@Table(name = "client")
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "client")
 public class Client extends User {
     private int age;
     private String phone;

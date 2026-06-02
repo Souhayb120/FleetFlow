@@ -23,7 +23,8 @@ public class ChauffeurServiceImpl implements ChauffeurService {
     }
 
     public void deleteChauffeur(Long id){
-        chauffeurRepository.deleteById(id);
+        Chauffeur chauffeur = chauffeurRepository.findById(id).orElseThrow(()-> new RuntimeException("Chauffeur not found with id :"+id));
+        chauffeurRepository.delete(chauffeur);
     }
 
     public List<ResponceChauffeurDTO> displayChauffeurs(){
@@ -40,15 +41,12 @@ public class ChauffeurServiceImpl implements ChauffeurService {
     }
 
     public Chauffeur updateChauffeur (Long id, Chauffeur newData){
-        Chauffeur chauffeur = chauffeurRepository.findById(id).orElse(null);
-        if(chauffeur != null){
+        Chauffeur chauffeur = chauffeurRepository.findById(id).orElseThrow(()-> new RuntimeException("Chauffeur not found with id :"+id));
             chauffeur.setUsername(newData.getUsername());
             chauffeur.setPhone(newData.getPhone());
             chauffeur.setIsDisponible(newData.getIsDisponible());
             chauffeur.setPermisType(newData.getPermisType());
             return chauffeurRepository.save(chauffeur);
-        }
-        return null;
     }
 
     public List<ResponceChauffeurDTO> findByDisponibility(){
@@ -61,7 +59,6 @@ public class ChauffeurServiceImpl implements ChauffeurService {
                 }).toList();
     }
 
-
     public List<ResponceChauffeurDTO> findByPermisTypeDisponible(String permisType, Boolean isDisponible){
         List<Chauffeur> chauffeurs = chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible);
         return chauffeurs
@@ -71,8 +68,6 @@ public class ChauffeurServiceImpl implements ChauffeurService {
                     return dto;
                 }).toList();
     }
-
-
     public List<String> displayChauffeursByNom(){
         List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
         return chauffeurs

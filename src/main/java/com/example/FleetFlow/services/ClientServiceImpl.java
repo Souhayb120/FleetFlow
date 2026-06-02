@@ -5,7 +5,6 @@
     import com.example.FleetFlow.Mapper.ClientMapper;
     import com.example.FleetFlow.models.Client;
     import com.example.FleetFlow.repositories.ClientRepository;
-    import com.example.FleetFlow.repositories.UserRepository;
     import com.example.FleetFlow.serviceInterfaces.ClientService;
     import lombok.RequiredArgsConstructor;
     import org.springframework.stereotype.Service;
@@ -18,19 +17,17 @@
 
         private final ClientRepository clientRepository;
         private final ClientMapper mapper;
-        private final UserRepository userRepository;
 
         public void ajouterClient(RequestClientDTO client){
-            if(!userRepository.existsByEmail(client.getEmail())){
-                userRepository.save(mapper.toEntity(client));
-            }
+            Client newClient = mapper.toEntity(client);
+            clientRepository.save(newClient);
         }
 
         public void deleteClient(Long id){
-            if(clientRepository.existsById(id)){
-                clientRepository.deleteById(id);
-            }
+            Client client = clientRepository.findById(id).orElseThrow(()-> new RuntimeException("Client not found with id :"+id));
+            clientRepository.delete(client);
         }
+
             public List<ResponceClientDTO> afficherClients(){
                 List<Client> clients = clientRepository.findAll();
                 return clients
@@ -42,16 +39,12 @@
                         })
                         .toList();
                 }
+
         public Client updateClient(Long id, Client newData){
-            Client client = clientRepository.findById(id).orElse(null);
-            if(client != null){
+            Client client = clientRepository.findById(id).orElseThrow(()-> new RuntimeException("Client not found with id :"+id));
                 client.setUsername(newData.getUsername());
                 client.setEmail(newData.getEmail());
                 client.setPhone(newData.getPhone());
                 return clientRepository.save(client);
-            }
-            return null;
         }
-
-
     }

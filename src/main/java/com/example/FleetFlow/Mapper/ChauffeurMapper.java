@@ -10,5 +10,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ChauffeurMapper {
         ResponceChauffeurDTO toDTO(Chauffeur chauffeur);
-        Chauffeur toEntity(RequestChauffeurDTO chauffeur);
+        Chauffeur toEntity(RequestChauffeurDTO dto);
+
 }
