@@ -59,6 +59,12 @@ return AuthenticationResponceDTO.builder()
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        User user = userRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("email not found"));
+        return org.springframework.security.core.userdetails.User
+                .builder()
+                .username(user.getEmail())
+                .username(user.getPassword())
+                .authorities(user.getAuthorities().getAuth)
+                .build();
     }
 }

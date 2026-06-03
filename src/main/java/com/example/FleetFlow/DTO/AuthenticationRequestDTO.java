@@ -1,5 +1,6 @@
 package com.example.FleetFlow.DTO;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 public class AuthenticationRequestDTO {
     @NonNull
+    @Email
     private String email;
     @NonNull
     @Size(min=6, max=50)

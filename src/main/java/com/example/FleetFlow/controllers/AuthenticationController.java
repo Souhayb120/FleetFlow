@@ -7,10 +7,8 @@ import com.example.FleetFlow.security.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
@@ -19,12 +17,13 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponceDTO> register(
-            @Valid @RequestParam RegisterUserDTO registerUserDTO){
+            @Valid @RequestBody RegisterUserDTO registerUserDTO){
         return ResponseEntity.ok(authenticationService.register(registerUserDTO));
     }
+
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponceDTO> login(
-            @Valid @RequestParam AuthenticationRequestDTO authenticationRequestDTO){
+            @Valid @RequestBody AuthenticationRequestDTO authenticationRequestDTO){
         return ResponseEntity.ok(authenticationService.login(authenticationRequestDTO));
     }
 
