@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class AuthenticationRequestDTO {
     @NonNull
-    private String username;
+    private String email;
     @NonNull
     @Size(min=6, max=50)
     private String password;
