@@ -7,9 +7,12 @@
     import com.example.FleetFlow.repositories.ClientRepository;
     import com.example.FleetFlow.serviceInterfaces.ClientService;
     import lombok.RequiredArgsConstructor;
+    import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
     import org.springframework.stereotype.Service;
 
-    import java.util.List;
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.Pageable;
+
 
     @Service
     @RequiredArgsConstructor
@@ -17,28 +20,37 @@
 
         private final ClientRepository clientRepository;
         private final ClientMapper mapper;
+        private final BCryptPasswordEncoder passwordEncoder;
 
-        public void ajouterClient(RequestClientDTO client){
+        public ResponceClientDTO ajouterClient(RequestClientDTO client){
+            if(clientRepository.findByEmail(client.getEmail()).isPresent()){
+                throw new RuntimeException("Email already exists!");
+            }
             Client newClient = mapper.toEntity(client);
-            clientRepository.save(newClient);
+
+            newClient.setUsername(client.getUsername());
+            newClient.setEmail(client.getEmail());
+            newClient.setPhone(client.getPhone());
+            newClient.setAge(client.getAge());
+            newClient.setPassword(passwordEncoder.encode(client.getPassword()));
+
+            return mapper.toDTO(clientRepository.save(newClient));
         }
 
-        public void deleteClient(Long id){
+        public boolean deleteClient(Long id){
             Client client = clientRepository.findById(id).orElseThrow(()-> new RuntimeException("Client not found with id :"+id));
             clientRepository.delete(client);
+            return true;
         }
-
-            public List<ResponceClientDTO> afficherClients(){
-                List<Client> clients = clientRepository.findAll();
-                return clients
-                        .stream()
-                        .map((client)->{
+            public Page<ResponceClientDTO> afficherClients(Pageable pageable){
+                return clientRepository.findAll(pageable)
+                        .map(client -> {
                             ResponceClientDTO dto = mapper.toDTO(client);
                             dto.setNombreLivraison(client.getLivraisonList().size());
                             return dto;
-                        })
-                        .toList();
+                        });
                 }
+
 
         public Client updateClient(Long id, Client newData){
             Client client = clientRepository.findById(id).orElseThrow(()-> new RuntimeException("Client not found with id :"+id));

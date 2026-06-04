@@ -4,40 +4,53 @@ package com.example.FleetFlow.services;
 import com.example.FleetFlow.DTO.ResponceChauffeurDTO;
 import com.example.FleetFlow.DTO.RequestChauffeurDTO;
 import com.example.FleetFlow.Mapper.ChauffeurMapper;
+import com.example.FleetFlow.enums.Role;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.repositories.ChauffeurRepository;
 import com.example.FleetFlow.serviceInterfaces.ChauffeurService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @RequiredArgsConstructor
 public class ChauffeurServiceImpl implements ChauffeurService {
     private final ChauffeurMapper mapper;
     private final ChauffeurRepository chauffeurRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public void ajouterChauffeur(RequestChauffeurDTO chauffeur){
-        chauffeurRepository.save(mapper.toEntity(chauffeur));
+    public ResponceChauffeurDTO ajouterChauffeur(RequestChauffeurDTO chauffeur){
+        if(chauffeurRepository.findByEmail(chauffeur.getEmail()).isPresent()){
+            throw new RuntimeException("Email already exists!");
+        }
+        Chauffeur chauffeur1 = mapper.toEntity(chauffeur);
+
+        chauffeur1.setUsername(chauffeur.getUsername());
+        chauffeur1.setEmail(chauffeur.getEmail());
+        chauffeur1.setPassword(passwordEncoder.encode(chauffeur.getPassword()));
+        chauffeur1.setRole(Role.CHAUFFEUR);
+
+        return mapper.toDTO(chauffeurRepository.save(chauffeur1));
     }
 
-    public void deleteChauffeur(Long id){
+    public boolean deleteChauffeur(Long id){
         Chauffeur chauffeur = chauffeurRepository.findById(id).orElseThrow(()-> new RuntimeException("Chauffeur not found with id :"+id));
         chauffeurRepository.delete(chauffeur);
+        return true;
     }
 
-    public List<ResponceChauffeurDTO> displayChauffeurs(){
-       List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
-        return chauffeurs
-                .stream()
-                .map((chauffeur)->{
+    public Page<ResponceChauffeurDTO> displayAllChauffeurs(Pageable pageable){
+        return chauffeurRepository.findAll(pageable)
+                .map(chauffeur -> {
                     ResponceChauffeurDTO dto = mapper.toDTO(chauffeur);
                     dto.setNombreVehicules(chauffeur.getVichelList().size());
                     dto.setNombreLivraisons(chauffeur.getLivraisonList().size());
                     return dto;
-                })
-                .toList();
+                        }
+                );
     }
 
     public Chauffeur updateChauffeur (Long id, Chauffeur newData){
@@ -49,32 +62,19 @@ public class ChauffeurServiceImpl implements ChauffeurService {
             return chauffeurRepository.save(chauffeur);
     }
 
-    public List<ResponceChauffeurDTO> findByDisponibility(){
-        List<Chauffeur> chauffeurs = chauffeurRepository.findByIsDisponibleTrue();
-        return chauffeurs
-                .stream()
-                .map((chauffeur)->{
-                    ResponceChauffeurDTO dto = mapper.toDTO(chauffeur);
-                    return dto;
-                }).toList();
+    public Page<ResponceChauffeurDTO> findByDisponibility(Pageable pageable){
+        return chauffeurRepository.findByIsDisponibleTrue(pageable)
+                .map(mapper::toDTO);
     }
 
-    public List<ResponceChauffeurDTO> findByPermisTypeDisponible(String permisType, Boolean isDisponible){
-        List<Chauffeur> chauffeurs = chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible);
-        return chauffeurs
-                .stream()
-                .map((chauffeur)->{
-                    ResponceChauffeurDTO dto = mapper.toDTO(chauffeur);
-                    return dto;
-                }).toList();
+    public Page<ResponceChauffeurDTO> findByPermisTypeDisponible(String permisType, Boolean isDisponible,Pageable pageable){
+     return chauffeurRepository.findByPermisTypeAndIsDisponible(permisType,isDisponible,pageable)
+             .map(mapper::toDTO);
     }
-    public List<String> displayChauffeursByNom(){
-        List<Chauffeur> chauffeurs = chauffeurRepository.findAll();
-        return chauffeurs
-                .stream()
-                .map((chauffeur)->{
-                    ResponceChauffeurDTO dto = mapper.toDTO(chauffeur);
-                    return dto.getUsername();
-                }).toList();
+
+    public Page<ResponceChauffeurDTO> displayChauffeursByNom(String nom, Pageable pageable){
+        return  chauffeurRepository.findByNom(nom,pageable)
+                .map(mapper::toDTO);
+
     }
 }

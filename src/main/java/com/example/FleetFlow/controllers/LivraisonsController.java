@@ -1,13 +1,20 @@
 package com.example.FleetFlow.controllers;
 
-import com.example.FleetFlow.DTO.LivraisionDTO;
+import com.example.FleetFlow.DTO.ResponceLivraisionDTO;
 import com.example.FleetFlow.Mapper.LivraisionMapper;
 import com.example.FleetFlow.enums.LivraisionStatut;
 import com.example.FleetFlow.models.Livraison;
 import com.example.FleetFlow.services.LivraisonServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,22 +28,23 @@ public class LivraisonsController {
     private LivraisionMapper livraisionMapper;
 
     @PostMapping("/creerLivraison")
-    public LivraisionDTO creatLivraision(@RequestBody @Valid LivraisionDTO dto) {
+    public ResponceLivraisionDTO creatLivraision(@RequestBody @Valid ResponceLivraisionDTO dto) {
         Livraison livraison = livraisionMapper.toEntity(dto);
         Livraison saved = livraisonServicesImpl.creeLivraision(livraison);
         return livraisionMapper.toDTO(saved);
     }
+
     @PutMapping("/{id}/assign")
-    public LivraisionDTO assign(
+    public ResponceLivraisionDTO assign(
             @PathVariable long id,
             @RequestParam long chauffeurId,
             @RequestParam long vehiculeId) {
-        Livraison livraison = livraisonServicesImpl.assigner(id,(Long) chauffeurId, vehiculeId);
+        Livraison livraison = livraisonServicesImpl.assigner(id, (Long) chauffeurId, vehiculeId);
         return livraisionMapper.toDTO(livraison);
     }
 
     @PutMapping("/{id}/statut")
-    public LivraisionDTO updateStatut(
+    public ResponceLivraisionDTO updateStatut(
             @PathVariable Long id,
             @RequestParam LivraisionStatut statut) {
         Livraison livraison = livraisonServicesImpl.updateStatut(id, statut);
@@ -44,33 +52,47 @@ public class LivraisonsController {
     }
 
     @GetMapping("/AfficherLivraison")
-    public List<LivraisionDTO> list() {
-        return livraisonServicesImpl.getAll()
-                .stream()
-                .map(livraisionMapper::toDTO)
-                .toList();
+    public ResponseEntity<Page<ResponceLivraisionDTO>> getlivraision(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir
+    ) {
+        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        return ResponseEntity.ok(livraisonServicesImpl.getAll((Pageable) PageRequest.of(pageNumber, pageSize, sort))
+                .map(livraisionMapper::toDTO));
     }
 
-
     @GetMapping("/AfficherLivraisonByChauffeurDisponible")
-    public List<LivraisionDTO> getlivraisonByChauffeurDis() {
-        return livraisonServicesImpl.getLivraisonByChaffeurDisponible()
-                .stream()
-                .map(livraisionMapper::toDTO)
-                .toList();
+    public ResponseEntity<Page<ResponceLivraisionDTO>>getlivraisonByChauffeurDis
+            (
+                    @RequestParam(defaultValue = "1") int pageNumber,
+                    @RequestParam(defaultValue = "5") int pageSize,
+                    @RequestParam(defaultValue = "id") String sortBy,
+                    @RequestParam(defaultValue = "asc") String sortDir
+            )
+    {
+        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        return ResponseEntity.ok(livraisonServicesImpl.getLivraisonByChauffeurDisponible((Pageable) PageRequest.of(pageNumber-1, pageSize, sort))
+                .map(livraisionMapper::toDTO));
     }
 
     @GetMapping("/AfficherLivraisonByStatut")
-    public List<LivraisionDTO> getbystatut(@RequestParam LivraisionStatut statut) {
-        return livraisonServicesImpl.getbystatut(statut)
-                .stream()
-                .map(livraisionMapper::toDTO)
-                .toList();
+    public ResponseEntity<Page<ResponceLivraisionDTO>>getbystatut(
+            @RequestParam LivraisionStatut statut,
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir
+
+    ) {
+        Sort sort = sortDir.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+            Page<ResponceLivraisionDTO> rs = livraisonServicesImpl.getbystatut(statut,(Pageable) PageRequest.of(pageNumber-1,pageSize,sort));
+            return ResponseEntity.ok(rs);
     }
 
-
     @GetMapping("/AfficherLivraisonByClient")
-    public List<LivraisionDTO> findbyclientid(@RequestParam Long id) {
+    public List<ResponceLivraisionDTO> findbyclientid(@RequestParam Long id) {
         return livraisonServicesImpl.findbyclientId(id)
                 .stream()
                 .map(livraisionMapper::toDTO)
@@ -79,7 +101,7 @@ public class LivraisonsController {
 
 
     @GetMapping("/AfficherLivraisonBetweenDates")
-    public List<LivraisionDTO> findbetweendates(
+    public List<ResponceLivraisionDTO> findbetweendates(
             @RequestParam LocalDate date1,
             @RequestParam LocalDate date2) {
         return livraisonServicesImpl.findbetweendates(date1, date2)
@@ -89,7 +111,7 @@ public class LivraisonsController {
     }
 
     @GetMapping("/AfficherLivraisonByDestination")
-    public List<LivraisionDTO> findbydestinationadress(@RequestParam String ville) {
+    public List<ResponceLivraisionDTO> findbydestinationadress(@RequestParam String ville) {
         return livraisonServicesImpl.findbyadressedestination(ville)
                 .stream()
                 .map(livraisionMapper::toDTO)

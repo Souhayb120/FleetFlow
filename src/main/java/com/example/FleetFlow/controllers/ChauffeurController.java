@@ -8,6 +8,11 @@ import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.services.ChauffeurServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,13 +30,21 @@ public class ChauffeurController {
     }
 
     @GetMapping("/afficherChauffeurs")
-    public List<ResponceChauffeurDTO> displayChauffeurs(){
-        return chauffeurServiceImpl.displayChauffeurs();
+    public ResponseEntity<Page<ResponceChauffeurDTO>> displayChauffeurs(
+            @RequestParam (defaultValue = "1") int pageNumber,
+            @RequestParam (defaultValue = "5") int pagrSize,
+            @RequestParam (defaultValue = "username") String sortBY,
+            @RequestParam (defaultValue = "asc") String  sortDer
+    ){
+        Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
+      Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayAllChauffeurs(PageRequest.of(pageNumber,pagrSize,sort));
+        return ResponseEntity.ok(rs);
     }
 
     @DeleteMapping("/supprimerChauffeur/{id}")
-    public void deleteChauffeur(@PathVariable  Long id){
+    public boolean deleteChauffeur(@PathVariable  Long id){
         chauffeurServiceImpl.deleteChauffeur(id);
+        return true;
     }
 
     @PutMapping("/modifierChauffeur/{id}")
@@ -40,17 +53,43 @@ public class ChauffeurController {
     }
 
     @GetMapping("/afficherChaffeursDisponible")
-    public List<ResponceChauffeurDTO> findByIsDisponible(){
-        return chauffeurServiceImpl.findByDisponibility();
+    public ResponseEntity<Page<ResponceChauffeurDTO>> findByIsDisponible(
+            @RequestParam (defaultValue = "1") int pageNumber,
+            @RequestParam (defaultValue = "5") int pagrSize,
+            @RequestParam (defaultValue = "username") String sortBY,
+            @RequestParam (defaultValue = "asc") String  sortDer
+    )
+    {
+        Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByDisponibility(PageRequest.of(pageNumber,pagrSize,sort));
+        return ResponseEntity.ok(rs);
     }
 
     @GetMapping("/afficherChauffeursByPermis/{permisType}")
-    public List<ResponceChauffeurDTO> displayChauffeurs(@PathVariable String permisType , Boolean isDisponible){
-        return chauffeurServiceImpl.findByPermisTypeDisponible(permisType,isDisponible);
+    public ResponseEntity<Page<ResponceChauffeurDTO>> displayChauffeurs(
+            @RequestParam (defaultValue = "1") int pageNumber,
+            @RequestParam (defaultValue = "5") int pagrSize,
+            @RequestParam (defaultValue = "username") String sortBY,
+            @RequestParam (defaultValue = "asc") String  sortDer,
+            @RequestParam String permisType ,
+            @RequestParam Boolean isDisponible
+    )
+    {
+        Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByPermisTypeDisponible(permisType,isDisponible,PageRequest.of(pageNumber,pagrSize,sort));
+        return ResponseEntity.ok(rs);
     }
 
     @GetMapping("/afficherChauffeurByNom")
-    public List<String> displayChauffeursByNom(){
-        return chauffeurServiceImpl.displayChauffeursByNom();
+    public ResponseEntity<Page<ResponceChauffeurDTO>> displayChauffeursByNom
+            (       @RequestParam String nom,
+                    @RequestParam (defaultValue = "1") int pageNumber,
+                    @RequestParam (defaultValue = "5") int pagrSize,
+                    @RequestParam (defaultValue = "username") String sortBY,
+                    @RequestParam (defaultValue = "asc") String  sortDer
+            ){
+        Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayChauffeursByNom(nom,PageRequest.of(pageNumber,pagrSize,sort));
+        return ResponseEntity.ok(rs);
     }
 }
