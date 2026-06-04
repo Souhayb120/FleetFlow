@@ -1,5 +1,6 @@
 package com.example.FleetFlow.controllers;
 
+import com.example.FleetFlow.DTO.RequestLivraisionDTO;
 import com.example.FleetFlow.DTO.ResponceLivraisionDTO;
 import com.example.FleetFlow.Mapper.LivraisionMapper;
 import com.example.FleetFlow.enums.LivraisionStatut;
@@ -28,10 +29,8 @@ public class LivraisonsController {
     private LivraisionMapper livraisionMapper;
 
     @PostMapping("/creerLivraison")
-    public ResponceLivraisionDTO creatLivraision(@RequestBody @Valid ResponceLivraisionDTO dto) {
-        Livraison livraison = livraisionMapper.toEntity(dto);
-        Livraison saved = livraisonServicesImpl.creeLivraision(livraison);
-        return livraisionMapper.toDTO(saved);
+    public ResponseEntity<ResponceLivraisionDTO>  creatLivraision(@RequestBody @Valid RequestLivraisionDTO dto) {
+        return ResponseEntity.ok(livraisonServicesImpl.creeLivraision(dto));
     }
 
     @PutMapping("/{id}/assign")
