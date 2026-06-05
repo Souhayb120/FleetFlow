@@ -1,5 +1,6 @@
 package com.example.FleetFlow.DTO;
 
+import com.example.FleetFlow.enums.LivraisionStatut;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,7 @@ public class ResponceLivraisionDTO {
         @NotBlank
         private String adresseDestination;
 
-        @NotBlank
-        private String statut;
+        private LivraisionStatut statut;
 
         @NotNull
         private Long clientId;

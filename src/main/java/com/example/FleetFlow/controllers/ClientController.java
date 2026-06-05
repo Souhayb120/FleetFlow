@@ -31,7 +31,7 @@ public class ClientController {
             @RequestParam(defaultValue = "asc") String sortDir
     ) {
         Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        return ResponseEntity.ok(clientServiceImpl.afficherClients(PageRequest.of(pageNumber, pageSize, sort)));
+        return ResponseEntity.ok(clientServiceImpl.afficherClients(PageRequest.of(pageNumber-1, pageSize, sort)));
     }
     @DeleteMapping("/supprimerClient/{id}")
     public ResponseEntity<Boolean> deleteClient(@PathVariable Long id) {

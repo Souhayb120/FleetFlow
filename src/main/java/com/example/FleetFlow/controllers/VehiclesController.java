@@ -48,7 +48,7 @@
             )
     {
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
-        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.listerVehicule(PageRequest.of(pageNumber,pageSize,sort));
+        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.listerVehicule(PageRequest.of(pageNumber-1,pageSize,sort));
     return ResponseEntity.ok(rs);
     }
 
@@ -58,7 +58,7 @@
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "5") int pageSize
     ){{
-        return  ResponseEntity.ok(vehiculeServiceImpl.findbystatut(statut, PageRequest.of(pageNumber,pageSize)));
+        return  ResponseEntity.ok(vehiculeServiceImpl.findbystatut(statut, PageRequest.of(pageNumber-1,pageSize)));
     }
     }
     @GetMapping("/findGreaterCapacitythan")
@@ -71,7 +71,7 @@
 
     ){
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
-        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.findgreteCapacitythan(capacity,PageRequest.of(pageNumber,pageSize,sort));
+        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.findgreteCapacitythan(capacity,PageRequest.of(pageNumber-1,pageSize,sort));
         return ResponseEntity.ok(rs);
     }
     }

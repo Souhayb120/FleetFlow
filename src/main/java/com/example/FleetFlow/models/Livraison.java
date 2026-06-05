@@ -15,7 +15,10 @@ public class Livraison {
     private LocalDate dateLivraison;
     private String adresseDepart;
     private String adresseDestination;
+
+    @Enumerated(EnumType.STRING)
     private LivraisionStatut livraisionStatut;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

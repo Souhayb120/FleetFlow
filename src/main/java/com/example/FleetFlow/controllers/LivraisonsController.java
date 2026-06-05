@@ -52,7 +52,7 @@ public class LivraisonsController {
             @RequestParam(defaultValue = "asc") String sortDir
     ) {
         Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        return ResponseEntity.ok(livraisonServicesImpl.getAll(PageRequest.of(pageNumber, pageSize, sort)));
+        return ResponseEntity.ok(livraisonServicesImpl.getAll(PageRequest.of(pageNumber-1, pageSize, sort)));
     }
 
     @GetMapping("/AfficherLivraisonByChauffeurDisponible")

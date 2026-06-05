@@ -38,7 +38,7 @@ public class ChauffeurController {
             @RequestParam (defaultValue = "asc") String  sortDer
     ){
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
-        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayAllChauffeurs(PageRequest.of(pageNumber,pagrSize,sort));
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayAllChauffeurs(PageRequest.of(pageNumber-1,pagrSize,sort));
         return ResponseEntity.ok(rs);
     }
 
@@ -62,7 +62,7 @@ public class ChauffeurController {
     )
     {
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
-        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByDisponibility(PageRequest.of(pageNumber,pagrSize,sort));
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByDisponibility(PageRequest.of(pageNumber-1,pagrSize,sort));
         return ResponseEntity.ok(rs);
     }
 
@@ -77,7 +77,7 @@ public class ChauffeurController {
     )
     {
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
-        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByPermisTypeDisponible(permisType,isDisponible,PageRequest.of(pageNumber,pagrSize,sort));
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.findByPermisTypeDisponible(permisType,isDisponible,PageRequest.of(pageNumber-1,pagrSize,sort));
         return ResponseEntity.ok(rs);
     }
 
@@ -90,7 +90,7 @@ public class ChauffeurController {
                     @RequestParam (defaultValue = "asc") String  sortDer
             ){
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
-        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayChauffeursByNom(nom,PageRequest.of(pageNumber,pagrSize,sort));
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayChauffeursByNom(nom,PageRequest.of(pageNumber-1,pagrSize,sort));
         return ResponseEntity.ok(rs);
     }
 }
