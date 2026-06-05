@@ -16,6 +16,6 @@ public interface ChauffeurRepository extends JpaRepository<Chauffeur, Long> {
     Page<Chauffeur> findByIsDisponibleTrue(Pageable pageable);
     Page<Chauffeur> findByPermisTypeAndIsDisponible(String permisType, Boolean isDisponible,Pageable pageable);
     Page<Chauffeur> findAll(Pageable pageable);
-    Page<Chauffeur> findByNom(String nom, Pageable pageable);
-    Optional<Object> findByEmail(String email);
+    Page<Chauffeur>  findByUsername(String nom, Pageable pageable);
+    Optional<Chauffeur> findByEmail(String email);
 }

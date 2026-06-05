@@ -34,6 +34,7 @@
             newClient.setAge(client.getAge());
             newClient.setPassword(passwordEncoder.encode(client.getPassword()));
 
+
             return mapper.toDTO(clientRepository.save(newClient));
         }
 

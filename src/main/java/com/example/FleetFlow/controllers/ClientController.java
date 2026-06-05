@@ -5,6 +5,7 @@ import com.example.FleetFlow.DTO.RequestClientDTO;
 import com.example.FleetFlow.models.Client;
 import com.example.FleetFlow.services.ClientServiceImpl;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,13 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/clients")
+@RequiredArgsConstructor
 public class ClientController {
 
     private final ClientServiceImpl clientServiceImpl;
 
-    public ClientController(ClientServiceImpl clientServiceImpl) {
-        this.clientServiceImpl = clientServiceImpl;
-    }
     @PostMapping("/ajouterClient")
     public ResponseEntity<ResponceClientDTO> saveClient(@Valid @RequestBody RequestClientDTO client) {
         return ResponseEntity.ok(clientServiceImpl.ajouterClient(client));
@@ -38,8 +37,10 @@ public class ClientController {
     public ResponseEntity<Boolean> deleteClient(@PathVariable Long id) {
         return ResponseEntity.ok(clientServiceImpl.deleteClient(id));
     }
+
     @PutMapping("/modifierClient/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
         return ResponseEntity.ok(clientServiceImpl.updateClient(id, client));
     }
+
 }

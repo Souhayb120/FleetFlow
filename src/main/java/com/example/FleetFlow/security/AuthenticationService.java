@@ -29,23 +29,23 @@ public class AuthenticationService implements UserDetailsService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponceDTO register(
-            @Valid RegisterUserDTO registerUserDTO) {
-if(userRepository.findByEmail(registerUserDTO.getEmail()).isPresent()){
-    throw new RuntimeException("Username already exists");
-}
+    public AuthenticationResponceDTO register(@Valid RegisterUserDTO registerUserDTO) {
 
-User user = userMapper.ToEntity(registerUserDTO);
-user.setUsername(registerUserDTO.getUsername());
-user.setEmail(registerUserDTO.getEmail());
-user.setRole(Role.CHAUFFEUR);
-user.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
-userRepository.save(user);
+        if(userRepository.findByEmail(registerUserDTO.getEmail()).isPresent()){
+            throw new RuntimeException("Username already exists");
+        }
+        User user = userMapper.ToEntity(registerUserDTO);
 
-var jwtToken = jwtService.generateToken(user);
-return AuthenticationResponceDTO.builder()
-        .token(jwtToken)
-        .build();
+        user.setUsername(registerUserDTO.getUsername());
+        user.setEmail(registerUserDTO.getEmail());
+        user.setRole(Role.CHAUFFEUR);
+        user.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
+        userRepository.save(user);
+
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponceDTO.builder()
+                .token(jwtToken)
+                .build();
     }
 
     public AuthenticationResponceDTO login(AuthenticationRequestDTO request) {
@@ -63,8 +63,8 @@ return AuthenticationResponceDTO.builder()
         return org.springframework.security.core.userdetails.User
                 .builder()
                 .username(user.getEmail())
-                .username(user.getPassword())
-                .authorities(user.getAuthorities().getAuth)
+                .password(user.getPassword())
+                .authorities(user.getRole().getAuthorities())
                 .build();
     }
 }

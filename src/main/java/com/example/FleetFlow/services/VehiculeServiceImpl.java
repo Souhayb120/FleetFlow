@@ -14,7 +14,6 @@
     import org.springframework.data.domain.Pageable;
     import org.springframework.stereotype.Service;
 
-    import java.util.List;
 
     @Service
     @RequiredArgsConstructor
@@ -51,7 +50,7 @@
                 return true;
         }
         public Page<ResponceVehiculeDTO> listerVehicule(Pageable pageable) {
-            return vehculeRepository.findAllVehicule(pageable)
+            return vehculeRepository.findAll(pageable)
                     .map(vehiculeMapper::toDTO);
         }
 

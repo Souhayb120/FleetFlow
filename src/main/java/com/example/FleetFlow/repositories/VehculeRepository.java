@@ -10,9 +10,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface VehculeRepository extends JpaRepository<Vehicule,Long> {
-Page<Vehicule> findByStatutIsTrue();
 Page<Vehicule> findByStatut(VehiculeStatut statut, Pageable pageable);
-Page<Vehicule> findAllVehicule(Pageable pageable);
+Page<Vehicule> findAll(Pageable pageable);
 
 @Query("SELECT v FROM Vehicule v where v.capacite > :thisCapcity")
     Page<Vehicule> findByCapaciteGreaterThan(int thisCapcity, Pageable pageable);

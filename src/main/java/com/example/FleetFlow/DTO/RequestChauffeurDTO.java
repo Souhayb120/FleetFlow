@@ -11,6 +11,6 @@ public class RequestChauffeurDTO extends RegisterUserDTO{
     private String phone;
     @NotBlank(message = "Permis Type is mandatory")
     private String permisType;
-    @NotBlank(message = "age Type is mandatory")
+    @NonNull
     private int age;
 }

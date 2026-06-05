@@ -17,7 +17,6 @@ public class RequestVehiculeDTO {
     @Min(value = 1, message = "Capacité must be at least 1")
     private int capacite;
 
-    @NotNull(message = "Statut is required")
     private VehiculeStatut statut;
 
     @NotBlank(message = "Type is required")

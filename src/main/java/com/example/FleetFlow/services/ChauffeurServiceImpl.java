@@ -32,8 +32,10 @@ public class ChauffeurServiceImpl implements ChauffeurService {
         chauffeur1.setEmail(chauffeur.getEmail());
         chauffeur1.setPassword(passwordEncoder.encode(chauffeur.getPassword()));
         chauffeur1.setRole(Role.CHAUFFEUR);
-
-        return mapper.toDTO(chauffeurRepository.save(chauffeur1));
+        chauffeur1.setIsDisponible(true);
+        ResponceChauffeurDTO dto = mapper.toDTO(chauffeurRepository.save(chauffeur1));
+        dto.setUsername(chauffeur.getUsername());
+        return dto;
     }
 
     public boolean deleteChauffeur(Long id){
@@ -73,7 +75,7 @@ public class ChauffeurServiceImpl implements ChauffeurService {
     }
 
     public Page<ResponceChauffeurDTO> displayChauffeursByNom(String nom, Pageable pageable){
-        return  chauffeurRepository.findByNom(nom,pageable)
+        return  chauffeurRepository.findByUsername(nom,pageable)
                 .map(mapper::toDTO);
 
     }

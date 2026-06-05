@@ -14,9 +14,11 @@ import com.example.FleetFlow.repositories.ChauffeurRepository;
 import com.example.FleetFlow.repositories.VehculeRepository;
 import com.example.FleetFlow.serviceInterfaces.LivraisonService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
 
+import org.jspecify.annotations.Nullable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 
@@ -46,7 +48,7 @@ public class LivraisonServiceImpl implements LivraisonService {
     }
 
 
-        public ResponceLivraisionDTO  assigner(Long livraisonId, Long chauffeurId, Long vehiculeId) {
+        public ResponceLivraisionDTO assigner(Long livraisonId, Long chauffeurId, Long vehiculeId) {
             Livraison livraison = livraisionRepository.findById(livraisonId).orElseThrow(() -> new RuntimeException("Not Found"));;
             Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId).orElseThrow(() -> new RuntimeException("Not Found"));
             Vehicule vehicule = vehiculeRepository.findById(vehiculeId).orElseThrow(() -> new RuntimeException("Not Found"));
@@ -66,29 +68,39 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisionMapper.toDTO(livraisionRepository.save(livraison));
     }
     @Override
-    public Page<Livraison> getAll(Pageable pageable) {
-        return livraisionRepository.findAll(pageable);
+        public Page<ResponceLivraisionDTO> getAll(Pageable pageable) {
+        return livraisionRepository.findAll(pageable)
+                .map(livraisionMapper::toDTO);
     }
     @Override
-    public Page<Livraison> getbystatut(LivraisionStatut livraisionStatut, Pageable pageable){
-        return livraisionRepository.findByLivraisionStatut(livraisionStatut,pageable);
-    }
-    @Override
-    public Page<Livraison> findByClientId(Long id, Pageable pageable) {
-        return livraisionRepository.findByClientId(id, pageable);
-    }
-    @Override
-    public Page<Livraison> findBetweenDates(LocalDate date1, LocalDate date2, Pageable pageable) {
-        return livraisionRepository.findBetweenDates(date1, date2, pageable);
-    }
-    @Override
-    public Page<Livraison> findByAdresseDestination(String ville, Pageable pageable) {
-        return livraisionRepository.findByadresseDestination(ville, pageable);
-    }
-    @Override
-    public Page<Livraison> getLivraisonByChauffeurDisponible(Pageable pageable) {
-        return livraisionRepository.findByChauffeurIsDisponible(pageable);
-    }
+    public Page<ResponceLivraisionDTO> getbystatut(LivraisionStatut livraisionStatut, Pageable pageable){
+        return livraisionRepository.findByLivraisionStatut(livraisionStatut,pageable)
+                .map(livraisionMapper::toDTO);
 
+    }
+    @Override
+    public Page<ResponceLivraisionDTO> findByClientId(Long id, Pageable pageable) {
+        return livraisionRepository.findByClientId(id, pageable)
+                .map(livraisionMapper::toDTO);
+
+    }
+    @Override
+    public Page<ResponceLivraisionDTO> findBetweenDates(LocalDate date1, LocalDate date2, Pageable pageable) {
+        return livraisionRepository.findBetweenDates(date1, date2, pageable)
+                .map(livraisionMapper::toDTO);
+
+    }
+    @Override
+    public Page<ResponceLivraisionDTO> findByAdresseDestination(String ville, Pageable pageable) {
+        return livraisionRepository.findByadresseDestination(ville, pageable)
+                .map(livraisionMapper::toDTO);
+
+    }
+    @Override
+    public Page<ResponceLivraisionDTO> getLivraisonByChauffeurDisponible(Pageable pageable) {
+        return livraisionRepository.findByChauffeurIsDisponible(pageable)
+                .map(livraisionMapper::toDTO);
+
+    }
 
 }

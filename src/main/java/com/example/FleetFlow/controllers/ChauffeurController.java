@@ -7,6 +7,7 @@ import com.example.FleetFlow.DTO.RequestChauffeurDTO;
 import com.example.FleetFlow.models.Chauffeur;
 import com.example.FleetFlow.services.ChauffeurServiceImpl;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,14 +20,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/chauffeurs")
+@RequiredArgsConstructor
 public class ChauffeurController {
 
-    @Autowired
-    private ChauffeurServiceImpl chauffeurServiceImpl;
+   final private ChauffeurServiceImpl chauffeurServiceImpl;
 
     @PostMapping("/ajouterChauffeur")
-    public void saveChauffeur( @Valid @RequestBody RequestChauffeurDTO chauffeur){
-        chauffeurServiceImpl.ajouterChauffeur(chauffeur);
+    public ResponseEntity<ResponceChauffeurDTO> saveChauffeur(@Valid @RequestBody RequestChauffeurDTO chauffeur){
+       return  ResponseEntity.ok(chauffeurServiceImpl.ajouterChauffeur(chauffeur));
     }
 
     @GetMapping("/afficherChauffeurs")
@@ -37,7 +38,7 @@ public class ChauffeurController {
             @RequestParam (defaultValue = "asc") String  sortDer
     ){
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBY).ascending() : Sort.by(sortBY).descending();
-      Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayAllChauffeurs(PageRequest.of(pageNumber,pagrSize,sort));
+        Page<ResponceChauffeurDTO> rs = chauffeurServiceImpl.displayAllChauffeurs(PageRequest.of(pageNumber,pagrSize,sort));
         return ResponseEntity.ok(rs);
     }
 

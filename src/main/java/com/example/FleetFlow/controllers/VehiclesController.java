@@ -2,27 +2,25 @@
 
     import com.example.FleetFlow.DTO.RequestVehiculeDTO;
     import com.example.FleetFlow.DTO.ResponceVehiculeDTO;
-    import com.example.FleetFlow.Mapper.VehiculeMapper;
     import com.example.FleetFlow.enums.VehiculeStatut;
-    import com.example.FleetFlow.models.Vehicule;
     import com.example.FleetFlow.services.VehiculeServiceImpl;
     import jakarta.validation.Valid;
-    import org.springframework.beans.factory.annotation.Autowired;
+    import lombok.RequiredArgsConstructor;
+
     import org.springframework.data.domain.PageRequest;
     import org.springframework.data.domain.Sort;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
     import org.springframework.data.domain.Page;
 
-    import java.util.List;
+
 
     @RestController
-    @RequestMapping("/vehicules")
+    @RequestMapping("/api/vehicules")
+    @RequiredArgsConstructor
     public class VehiclesController {
-    @Autowired
-    private VehiculeServiceImpl vehiculeServiceImpl;
-    @Autowired
-    private VehiculeMapper vehiculeMapper;
+
+    final private VehiculeServiceImpl vehiculeServiceImpl;
 
     @PostMapping("/ajouterVehicule")
     public ResponseEntity<ResponceVehiculeDTO> ajouterVehucle(@RequestBody @Valid RequestVehiculeDTO v){
