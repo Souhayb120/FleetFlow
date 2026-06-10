@@ -17,5 +17,6 @@ public interface ChauffeurService {
     Page<ResponceChauffeurDTO> findByPermisTypeDisponible(String permisType, Boolean isDisponible,Pageable pageable);
     Page<ResponceChauffeurDTO> displayChauffeursByNom(String nom,Pageable pageable);
 
-    }
+//    Page<ResponceChauffeurDTO> displayAllchauferusPagination(Pageable pageable);
+}
 

@@ -3,7 +3,7 @@
     import com.example.FleetFlow.DTO.RequestVehiculeDTO;
     import com.example.FleetFlow.DTO.ResponceVehiculeDTO;
     import com.example.FleetFlow.enums.VehiculeStatut;
-    import com.example.FleetFlow.services.VehiculeServiceImpl;
+    import com.example.FleetFlow.serviceInterfaces.VehculeService;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
 
@@ -20,21 +20,21 @@
     @RequiredArgsConstructor
     public class VehiclesController {
 
-    final private VehiculeServiceImpl vehiculeServiceImpl;
+    final private VehculeService vehculeService;
 
     @PostMapping("/ajouterVehicule")
     public ResponseEntity<ResponceVehiculeDTO> ajouterVehucle(@RequestBody @Valid RequestVehiculeDTO v){
-    return ResponseEntity.ok(vehiculeServiceImpl.ajouterVehicule(v));
+    return ResponseEntity.ok(vehculeService.ajouterVehicule(v));
     }
 
     @PutMapping("/modifierVehicule/{id}")
         public ResponseEntity<ResponceVehiculeDTO> modifierVehicule(@PathVariable Long id, @RequestBody RequestVehiculeDTO dto) {
-            return ResponseEntity.ok(vehiculeServiceImpl.modifierVehicule(id,dto));
+            return ResponseEntity.ok(vehculeService.modifierVehicule(id,dto));
         }
 
     @DeleteMapping("/supprimer/{id}")
     public boolean supprimer(@PathVariable long id){
-         vehiculeServiceImpl.supprimzeVehicule(id);
+        vehculeService.supprimzeVehicule(id);
          return true;
     }
 
@@ -48,7 +48,7 @@
             )
     {
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
-        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.listerVehicule(PageRequest.of(pageNumber-1,pageSize,sort));
+        Page<ResponceVehiculeDTO> rs = vehculeService.listerVehicule(PageRequest.of(pageNumber-1,pageSize,sort));
     return ResponseEntity.ok(rs);
     }
 
@@ -58,7 +58,7 @@
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "5") int pageSize
     ){{
-        return  ResponseEntity.ok(vehiculeServiceImpl.findbystatut(statut, PageRequest.of(pageNumber-1,pageSize)));
+        return  ResponseEntity.ok(vehculeService.findbystatut(statut, PageRequest.of(pageNumber-1,pageSize)));
     }
     }
     @GetMapping("/findGreaterCapacitythan")
@@ -71,7 +71,7 @@
 
     ){
         Sort sort = sortDer.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
-        Page<ResponceVehiculeDTO> rs = vehiculeServiceImpl.findgreteCapacitythan(capacity,PageRequest.of(pageNumber-1,pageSize,sort));
+        Page<ResponceVehiculeDTO> rs = vehculeService.findgreteCapacitythan(capacity,PageRequest.of(pageNumber-1,pageSize,sort));
         return ResponseEntity.ok(rs);
     }
     }

@@ -79,4 +79,12 @@ public class ChauffeurServiceImpl implements ChauffeurService {
                 .map(mapper::toDTO);
 
     }
+
+//    @Override
+//    public Page<ResponceChauffeurDTO> displayAllchauferusPagination(Pageable pageable) {
+//            return chauffeurRepository.findAll(pageable)
+//                    .map(mapper::toDTO);
+//    }
+
+
 }
